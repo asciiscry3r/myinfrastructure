@@ -1,7 +1,6 @@
-
 module "nixos_image" {
     source  = "git::https://github.com/tweag/terraform-nixos.git//aws_image_nixos?ref=5f5a0408b299874d6a29d1271e9bffeee4c9ca71"
-    release = "21.05"
+    release = "20.09"
 }
 
 resource "tls_private_key" "state_ssh_key" {
@@ -17,6 +16,19 @@ resource "local_file" "machine_ssh_key" {
 resource "aws_key_pair" "generated_key" {
     key_name   = "generated-key-${sha256(tls_private_key.state_ssh_key.public_key_openssh)}"
     public_key = tls_private_key.state_ssh_key.public_key_openssh
+
+    tags = {
+        Name = "NixOS"
+    }
+}
+
+resource "aws_kms_key" "nixos" {
+    count       = (var.encryption_state != false ? 1 : 0 )
+    description = "nixos crypto key"
+
+    tags = {
+        Name = "NixOS"
+    }
 }
 
 resource "aws_instance" "nixos" {
@@ -26,6 +38,16 @@ resource "aws_instance" "nixos" {
     key_name        = aws_key_pair.generated_key.key_name
 
     root_block_device {
+        encrypted   = var.encryption_state
+        #kms_key_id  = aws_kms_key.nixos[0].key_id
         volume_size = var.ec2_volume_size
+
+        tags = {
+            Name = "NixOS"
+        }
+    }
+
+    tags = {
+        Name = "NixOS"
     }
 }

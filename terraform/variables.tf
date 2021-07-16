@@ -2,14 +2,6 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
-//variable "remote_state_backet" {
-//  default = "myinfra-terraform-state-store"
-//}
-//
-//variable "remote_state_backet_key" {
-//  default = "us-east-1"
-//}
-
 variable "ec2_volume_size" {
   default = 30
 }
@@ -24,4 +16,12 @@ variable "vpc_id_main" {
 
 variable "instance_type" {
   default = "t2.micro"
+}
+
+variable "cidr_allowed_for_ssh" {
+  default = "194.31.54.4/32"
+}
+
+variable "encryption_state" {
+  default = true
 }

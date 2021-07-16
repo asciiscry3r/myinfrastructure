@@ -12,7 +12,7 @@ resource "aws_security_group" "nixos" {
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = [""]
+    cidr_blocks      = [var.cidr_allowed_for_ssh]
   }
 
   egress {
