@@ -55,6 +55,7 @@ ___________
 
 All drives must be encrypted as possible.
 Prometheus server must be placed on Raspberry PI.
+Site: https://themes.getnikola.com/v8/hack/demo/pages/handbook/#all-you-need-to-know
 
 _____________
 [He is LIVE!!!!](https://photos.app.goo.gl/L8TDwDuh3dGLK6V56)

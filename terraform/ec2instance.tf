@@ -51,3 +51,12 @@ resource "aws_instance" "nixos" {
         Name = "NixOS"
     }
 }
+
+# WIP
+module "deploy_nixos" {
+    source = "git::https://github.com/tweag/terraform-nixos.git//deploy_nixos?ref=5f5a0408b299874d6a29d1271e9bffeee4c9ca71"
+    nixos_config = "${path.module}/../nixos/configuration.nix"
+    target_host = aws_instance.nixos.public_ip
+    ssh_private_key_file = local_file.machine_ssh_key.filename
+    ssh_agent = false
+}
