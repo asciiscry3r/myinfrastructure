@@ -57,5 +57,4 @@ All drives must be encrypted as possible.
 Prometheus server must be placed on Raspberry PI.
 
 _____________
-He is LIVE!!!!
-[![hmmmmm](https://images.app.goo.gl/zo8tHWppFW1LitV46)](https://photos.app.goo.gl/L8TDwDuh3dGLK6V56)
+[He is LIVE!!!!](https://photos.app.goo.gl/L8TDwDuh3dGLK6V56)
