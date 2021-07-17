@@ -28,7 +28,7 @@ resource "aws_kms_key" "encrypt" {
     description = "instances crypto key"
 
     tags = {
-        Name = "NixOS"
+        Name = "CryptedEncrypted"
         Env  = "mksplayground"
     }
 }
