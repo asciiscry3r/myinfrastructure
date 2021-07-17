@@ -1,0 +1,13 @@
+###########################################
+# Ubuntu server
+---
+
+allowed_apps:
+  - "SSH"
+
+base_apps:
+  - vim
+  - ranger
+  - git
+  - screen
+  - htop

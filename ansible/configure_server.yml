@@ -1,0 +1,6 @@
+---
+- hosts: aws_server
+
+  roles:
+    - name: server_config
+      become: yes

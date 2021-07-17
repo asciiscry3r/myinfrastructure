@@ -2,6 +2,12 @@ Server Config
 =========
 
 Configure ubuntu based servers 
+* logrotate
+* ufw management
+* system update
+* timesync
+* base soft management
+* fail2ban
 
 Role Variables
 --------------
