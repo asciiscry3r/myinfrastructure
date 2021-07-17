@@ -107,3 +107,13 @@ resource "aws_instance" "server" {
     Env  = "mksplayground"
   }
 }
+
+resource "aws_eip" "server" {
+  instance = aws_instance.server.id
+  vpc      = true
+
+  tags = {
+    Name = "Server"
+    Env  = "mksplayground"
+  }
+}

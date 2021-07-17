@@ -1,4 +1,5 @@
 ## Cloud and local components for work/lab/etc
+====================
 
     * backups
     * rpi server
@@ -8,6 +9,7 @@
     * IasC, SEC?, CM, OPS
 
 ### Backups
+=====================
 
     * encrypted
     * ansible CM
@@ -17,6 +19,7 @@
     * prometheus exporter
 
 ### Rpi 3 b+
+=====================
 
     * nixos or arch
     * encrypted
@@ -25,6 +28,7 @@
     * prometheus server
 
 ### IdeaPad Lenovo
+=======================
 
     * arch
     * encrypted
@@ -34,6 +38,7 @@
     * optional Grafana
 
 ### TP Link Archer C7
+========================
 
     * openwrt
     * prometheus exporter
@@ -41,6 +46,7 @@
     * bash CM
 
 ### AWS
+=========================
 
     * terraform
     * packer
@@ -50,6 +56,11 @@
     * service vpn fot monitoring
     * grafana
     * prometheus exporter
+
+To Do
+===========================
+
+    * nested map in terraform
 
 ___________
 
