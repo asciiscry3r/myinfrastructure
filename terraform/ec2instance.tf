@@ -52,11 +52,13 @@ resource "aws_instance" "nixos" {
     }
 }
 
-# WIP
-module "deploy_nixos" {
-    source = "git::https://github.com/tweag/terraform-nixos.git//deploy_nixos?ref=5f5a0408b299874d6a29d1271e9bffeee4c9ca71"
-    nixos_config = "${path.module}/../nixos/configuration.nix"
-    target_host = aws_instance.nixos.public_ip
-    ssh_private_key_file = local_file.machine_ssh_key.filename
-    ssh_agent = false
-}
+//Use nixos-instantiate for check configuration drift
+//Error: failed to execute ".terraform/modules/deploy_nixos/deploy_nixos/nixos-instantiate.sh": running (instantiating):  'nix-instantiate' '--show-trace' '--expr' $'\n  { system, configuration, ... }:\n  let\n    os = import <nixpkgs/nixos> { inherit system configuration; };\n    inherit (import <nixpkgs/lib>) concatStringsSep;\n  in {\n    substituters = concatStringsSep " " os.config.nix.binaryCaches;\n    trusted-public-keys = concatStringsSep " " os.config.nix.binaryCachePublicKeys;\n    drv_path = os.system.drvPath;\n    out_path = os.system;\n    inherit (builtins) currentSystem;\n  }' '--argstr' 'configuration' '/home/max/Projects/HomeInfrastructure/nixos/configuration.nix' '--argstr' 'system' 'x86_64-linux' -A out_path
+//│ .terraform/modules/deploy_nixos/deploy_nixos/nixos-instantiate.sh: line 44: nix-instantiate: command not found
+//module "deploy_nixos" {
+//    source = "git::https://github.com/tweag/terraform-nixos.git//deploy_nixos?ref=5f5a0408b299874d6a29d1271e9bffeee4c9ca71"
+//    nixos_config = "${path.module}/../nixos/configuration.nix"
+//    target_host = aws_instance.nixos.public_ip
+//    ssh_private_key_file = local_file.machine_ssh_key.filename
+//    ssh_agent = false
+//}
