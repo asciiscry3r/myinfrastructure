@@ -34,7 +34,7 @@ resource "aws_kms_key" "encrypt" {
 }
 
 resource "aws_instance" "nixos" {
-    count       = (var.deploy_nixos != false ? 1 : 0 )
+    count           = (var.deploy_nixos != false ? 1 : 0 )
     ami             = module.nixos_image.ami
     instance_type   = var.instance_type
     security_groups = [ aws_security_group.nixos[0].name ]
