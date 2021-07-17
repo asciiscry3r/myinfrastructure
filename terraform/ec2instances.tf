@@ -25,7 +25,7 @@ resource "aws_key_pair" "generated_key" {
 
 resource "aws_kms_key" "encrypt" {
     count       = (var.encryption_state != false ? 1 : 0 )
-    description = "nixos crypto key"
+    description = "instances crypto key"
 
     tags = {
         Name = "NixOS"
