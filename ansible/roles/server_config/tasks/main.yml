@@ -24,7 +24,36 @@
     update_cache: yes
     cache_valid_time: 3600
   with_items:
-    - "{{ base_apps }}"
+    - "{{ server_base_apps }}"
   tags:
     - install_pakages
 
+#- name: Allow and manage access on server
+#  ufw:
+#    rule: '{{ item.value.action }}'
+#    interface: '{{ item.value.interface }}'
+#    direction: '{{ item.value.direction }}'
+#    proto: '{{ item.value.proto }}'
+#    src: '{{ item.value.src }}'
+#    from_port: '{{ item.value.from_port }}'
+#    dest: '{{ item.value.dest }}'
+#    to_port: '{{ item.value.to_port }}'
+#  with_dict:
+#    - "{{ server_allowed_access }}"
+#  tags:
+#    - manage_fiirewall
+
+- name: Allow and manage access on server
+  ufw:
+    rule: '{{ item.action }}'
+    interface: '{{ item.interface }}'
+    direction: '{{ item.direction }}'
+    proto: '{{ item.proto }}'
+    src: '{{ item.src }}'
+    from_port: '{{ item.from_port }}'
+    dest: '{{ item.dest }}'
+    to_port: '{{ item.to_port }}'
+  with_items:
+    - "{{ server_allowed_access }}"
+  tags:
+    - manage_fiirewall
