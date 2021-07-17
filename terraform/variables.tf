@@ -25,3 +25,7 @@ variable "cidr_allowed_for_ssh" {
 variable "encryption_state" {
   default = true
 }
+
+variable "deploy_nixos" {
+  default = false
+}
