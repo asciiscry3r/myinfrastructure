@@ -29,6 +29,18 @@
   tags:
     - install_pakages
 
+- name: Install apparmor profiles and system utils
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - sendmail
+    - mailutils
+    - apparmor-profiles
+    - apparmor-profiles-extra
+    - apparmor-utils
+
 #- name: Allow and manage access on server
 #  ufw:
 #    rule: '{{ item.value.action }}'
@@ -64,6 +76,15 @@
     name: "{{ server_name }}"
   register: server_system_hostname
 
+- name: Define hostname in hosts file
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.0\.1'
+    line: '127.0.0.1 localhost {{ server_name }}'
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Set server time zone
   timezone:
     name: "{{ server_timezone }}"
@@ -87,16 +108,6 @@
 - name: Display journactl output
   debug:
     var: journactloutput
-
-- name: Install apparmor profiles and utils
-  apt:
-    pkg: "{{ item }}"
-    update_cache: yes
-    cache_valid_time: 3600
-  with_items:
-    - apparmor-profiles
-    - apparmor-profiles-extra
-    - apparmor-utils
 
 - name: Apply enforce policy to all profiles
   shell: aa-enforce /etc/apparmor.d/*
@@ -130,3 +141,10 @@
   reboot:
     reboot_timeout: 3600
   when: server_system_upgrades is changed and server_system_hostname is changed
+  tags:
+    - reboot_machine
+
+- name: Send Hello message from server
+  shell: |
+    echo "Hello from {{ server_name }}" | sendmail -s "Message from {{ server_name }}" {{ server_admin_email }}
+### error 67 no user

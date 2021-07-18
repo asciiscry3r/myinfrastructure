@@ -4,6 +4,7 @@
 
 server_name: example.com
 server_timezone: "Europe/Kiev"
+server_admin_email:
 journal_vacuum_size: "500M"
 journal_vacuum_time: "90d"
 server_base_apps:

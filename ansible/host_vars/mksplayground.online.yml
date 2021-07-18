@@ -4,9 +4,15 @@
 
 server_name: mksplayground.online
 server_timezone: "Europe/Kiev"
+server_admin_email: klimenkomaximsergievich@gmail.com
 journal_vacuum_size: "500M"
 journal_vacuum_time: "90d"
 server_base_apps:
+  - dnsutils
+  - net-tools
+  - rkhunter
+  - curl
+  - wget
   - vim
   - ranger
   - git

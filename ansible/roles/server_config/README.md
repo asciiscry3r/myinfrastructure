@@ -8,8 +8,9 @@ Configure ubuntu based servers
 * system update
 * time date
 * base soft management
-* fail2ban
 * set hostname
+* fail2ban
+* SSMTP
 
 Role Variables
 --------------
