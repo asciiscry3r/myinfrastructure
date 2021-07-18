@@ -2,6 +2,7 @@
 # Ubuntu server
 ---
 
+server_name: mksplayground.online
 server_timezone: "Europe/Kiev"
 journal_vacuum_size: "500M"
 journal_vacuum_time: "90d"
