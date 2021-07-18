@@ -57,3 +57,47 @@
     - "{{ server_allowed_access }}"
   tags:
     - manage_fiirewall
+
+- name: Set time zone
+  timezone:
+    name: "{{ server_timezone }}"
+  tags:
+    - set_timezone
+
+- name: Set NTP sync on
+  shell: timedatectl set-ntp yes
+  register: timedateoutput
+
+- name: Display timedatectl output
+  debug:
+    var: timedateoutput
+
+- name: Configure systemd journal
+  shell: |
+    journalctl --vacuum-size="{{ journal_vacuum_size }}"
+    journalctl --vacuum-time="{{ journal_vacuum_time }}"
+  register: journactloutput
+
+- name: Display journactl output
+  debug:
+    var: journactloutput
+
+- name: Install apparmor
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - apparmor-profiles
+    - apparmor-profiles-extra
+    - apparmor-utils
+
+- name: Setup apparmor
+  shell: aa-enforce /etc/apparmor.d/*
+  register: apparmor_enforce_output
+  tags:
+    - enforce_apparmor_profiles
+
+- name: Display aa-enforce output
+  debug:
+    var: apparmor_enforce_output
