@@ -30,7 +30,7 @@ resource "aws_security_group" "nixos" {
 }
 
 resource "aws_security_group" "server" {
-  name        = "nixos_server_security_group"
+  name        = "server_security_group"
   description = "Allow inbound traffic"
   vpc_id      = data.aws_vpc.nixos.id
 
