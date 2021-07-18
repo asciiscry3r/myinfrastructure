@@ -101,3 +101,21 @@
 - name: Display aa-enforce output
   debug:
     var: apparmor_enforce_output
+
+- name: Create securetty file
+  file:
+    path: /etc/securetty
+    state: touch
+    mode: 0644
+
+- name: Create logrotate configs
+  template:
+    src: logrotate.j2
+    dest: /etc/logrotate.d/{{ item.name }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - "{{ server_logrotate_conf }}"
+  tags:
+    - setup_logrotate
