@@ -25,9 +25,9 @@
     update_cache: yes
     cache_valid_time: 3600
   with_items:
-    - "{{ server_base_apps }}"
+    - "{{ server_present_apps }}"
   tags:
-    - install_pakages
+    - manage_packages
 
 - name: Install apparmor profiles and system utils
   apt:
@@ -35,11 +35,18 @@
     update_cache: yes
     cache_valid_time: 3600
   with_items:
-    - sendmail
-    - mailutils
     - apparmor-profiles
     - apparmor-profiles-extra
     - apparmor-utils
+
+- name: Remove packages
+  apt:
+    pkg: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ server_absent_app }}"
+  tags:
+    - manage_packages
 
 #- name: Allow and manage access on server
 #  ufw:
@@ -148,8 +155,3 @@
   when: server_system_upgrades is changed and server_system_hostname is changed
   tags:
     - reboot_machine
-
-- name: Send Hello message from server
-  shell: |
-    echo "Hello from {{ server_name }}" | sendmail -s "Message from {{ server_name }}" {{ server_admin_email }}
-### error 67 no user
