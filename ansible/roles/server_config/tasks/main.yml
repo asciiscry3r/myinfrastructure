@@ -16,19 +16,12 @@
   tags:
     - firewall
 
-#- name: UFW set incoming default policy
-#  ufw:
-#    rule: reject
-#    direction: incoming
-#  tags:
-#    - firewall
-#
-#- name: UFW set incoming default policy
-#  ufw:
-#    rule: reject
-#    direction: routed
-#  tags:
-#    - firewall
+- name: UFW set default policy
+  shell: |
+    sudo ufw default deny incoming
+    sudo ufw default deny routed
+  tags:
+    - firewall
 
 - name: Install Ubuntu/Debian packages and configure OS specific settings
   include: debbased.yml
@@ -63,6 +56,7 @@
     from_port: '{{ item.from_port }}'
     dest: '{{ item.dest }}'
     to_port: '{{ item.to_port }}'
+    route: '{{ item.route }}'
   with_items:
     - "{{ server_allowed_access }}"
   tags:

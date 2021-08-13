@@ -58,6 +58,7 @@ server_allowed_access:
     from_port: 5469
     dest: 1.2.3.4
     to_port: 5469
+    route: no
 
 server_logrotate_conf:
   - name: test
