@@ -1,0 +1,24 @@
+###############################################################################
+# mksideapad laptop
+---
+
+server_name: mksideapad.local
+server_timezone: "Europe/Kiev"
+server_admin_email: klimenkomaximsergievich@gmail.com
+journal_vacuum_size: "500M"
+journal_vacuum_time: "90d"
+
+server_securetty_content: |
+  console
+  #tty1
+  #tty2
+  #tty3
+  #tty4
+  #tty5
+  #tty6
+  #ttyS0
+  #hvc0
+
+server_allowed_access:
+
+server_logrotate_conf:

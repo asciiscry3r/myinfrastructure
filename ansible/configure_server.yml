@@ -1,6 +1,7 @@
 ---
-- hosts: aws_server
+- hosts: all
 
   roles:
     - name: server_config
       become: yes
+      become_user: root

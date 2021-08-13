@@ -1,11 +1,13 @@
 ---
 # tasks file for roles/server_config
+- debug:
+    var: "{{ inventory_hostname }}"
 
 - name: Allow incoming SSH conection
   ufw:
     rule: allow
     name: OpenSSH
-#  when: personal_pc false
+  when: "'local' not in inventory_hostname"
   tags:
     - firewall
 
@@ -59,6 +61,7 @@
     route: '{{ item.route }}'
   with_items:
     - "{{ server_allowed_access }}"
+  when: "server_allowed_access and server_allowed_access is not null"
   tags:
     - manage_fiirewall
 
@@ -130,12 +133,13 @@
     mode: 0644
   with_items:
     - "{{ server_logrotate_conf }}"
+  when: "server_logrotate_conf and server_logrotate_conf is not null"
   tags:
     - setup_logrotate
 
 - name: Reboot a machine that might have lots of updates to apply
   reboot:
     reboot_timeout: 3600
-  when: server_system_upgrades is changed and server_system_hostname is changed or machine_reboot_required.stat.exists
+  when: server_system_upgrades is changed or server_system_hostname is changed or machine_reboot_required.stat.exists
   tags:
     - reboot_machine
