@@ -14,11 +14,29 @@
     rule: allow
     name: OpenSSH
   when: personal_pc not defined or personal_pc false
+  tags:
+    - firewall
 
 - name: Enable firewall on system startup
   ufw:
     state: enabled
     logging: on
+  tags:
+    - firewall
+
+- name: UFW set incoming default policy
+  ufw:
+    rule: reject
+    dest: incoming
+  tags:
+    - firewall
+
+- name: UFW set incoming default policy
+  ufw:
+    rule: reject
+    dest: routed
+  tags:
+    - firewall
 
 - name: Install user defined packages
   apt:
