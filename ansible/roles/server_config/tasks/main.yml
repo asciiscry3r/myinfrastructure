@@ -8,12 +8,13 @@
   register: server_system_upgrades
   tags:
     - update_server
+    - reboot_machine
 
 - name: Allow incoming SSH conection
   ufw:
     rule: allow
     name: OpenSSH
-  when: personal_pc not defined or personal_pc false
+#  when: personal_pc false
   tags:
     - firewall
 
@@ -24,27 +25,28 @@
   tags:
     - firewall
 
-- name: UFW set incoming default policy
-  ufw:
-    rule: reject
-    dest: incoming
-  tags:
-    - firewall
-
-- name: UFW set incoming default policy
-  ufw:
-    rule: reject
-    dest: routed
-  tags:
-    - firewall
+#- name: UFW set incoming default policy
+#  ufw:
+#    rule: reject
+#    direction: incoming
+#  tags:
+#    - firewall
+#
+#- name: UFW set incoming default policy
+#  ufw:
+#    rule: reject
+#    direction: routed
+#  tags:
+#    - firewall
 
 - name: Install user defined packages
   apt:
-    pkg: '{{ item }}'
+    pkg: '{{ item.name }}'
     update_cache: yes
     cache_valid_time: 3600
+    state: '{{ item.state }}'
   with_items:
-    - "{{ server_present_apps }}"
+    - "{{ server_apps }}"
   tags:
     - manage_packages
 
@@ -57,15 +59,6 @@
     - apparmor-profiles
     - apparmor-profiles-extra
     - apparmor-utils
-
-- name: Remove packages
-  apt:
-    pkg: "{{ item }}"
-    state: absent
-  with_items:
-    - "{{ server_absent_app }}"
-  tags:
-    - manage_packages
 
 #- name: Allow and manage access on server
 #  ufw:
@@ -168,9 +161,16 @@
   tags:
     - setup_logrotate
 
+- name: Check if machine required reboot
+  stat:
+    dest: /var/run/reboot-required
+  register: machine_reboot_required
+  tags:
+    - reboot_machine
+
 - name: Reboot a machine that might have lots of updates to apply
   reboot:
     reboot_timeout: 3600
-  when: server_system_upgrades is changed and server_system_hostname is changed
+  when: server_system_upgrades is changed and server_system_hostname is changed or machine_reboot_required.stat.exists
   tags:
     - reboot_machine

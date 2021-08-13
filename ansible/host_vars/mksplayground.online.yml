@@ -7,17 +7,27 @@ server_timezone: "Europe/Kiev"
 server_admin_email: klimenkomaximsergievich@gmail.com
 journal_vacuum_size: "500M"
 journal_vacuum_time: "90d"
-server_base_apps:
-  - dnsutils
-  - net-tools
-  - rkhunter
-  - curl
-  - wget
-  - vim
-  - ranger
-  - git
-  - screen
-  - htop
+server_apps:
+  - name: dnsutils
+    state: present
+  - name: net-tools
+    state: present
+  - name: rkhunter
+    state: present
+  - name: curl
+    state: present
+  - name: wget
+    state: present
+  - name: vim
+    state: present
+  - name: ranger
+    state: present
+  - name: git
+    state: present
+  - name: screen
+    state: present
+  - name: htop
+    state: present
 
 server_securetty_content: |
   tty1
