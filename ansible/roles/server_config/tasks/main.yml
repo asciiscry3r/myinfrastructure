@@ -13,6 +13,7 @@
   ufw:
     rule: allow
     name: OpenSSH
+  when: personal_pc not defined or personal_pc false
 
 - name: Enable firewall on system startup
   ufw:
