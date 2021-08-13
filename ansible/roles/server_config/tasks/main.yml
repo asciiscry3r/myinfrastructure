@@ -1,14 +1,5 @@
 ---
 # tasks file for roles/server_config
-- name: Get system upgrades
-  apt:
-    upgrade: dist
-    update_cache: yes
-    cache_valid_time: 3600
-  register: server_system_upgrades
-  tags:
-    - update_server
-    - reboot_machine
 
 - name: Allow incoming SSH conection
   ufw:
@@ -39,26 +30,13 @@
 #  tags:
 #    - firewall
 
-- name: Install user defined packages
-  apt:
-    pkg: '{{ item.name }}'
-    update_cache: yes
-    cache_valid_time: 3600
-    state: '{{ item.state }}'
-  with_items:
-    - "{{ server_apps }}"
-  tags:
-    - manage_packages
+- name: Install Ubuntu/Debian packages and configure OS specific settings
+  include: debbased.yml
+  when: ansible_distribution == 'Ubuntu'
 
-- name: Install apparmor profiles and system utils
-  apt:
-    pkg: "{{ item }}"
-    update_cache: yes
-    cache_valid_time: 3600
-  with_items:
-    - apparmor-profiles
-    - apparmor-profiles-extra
-    - apparmor-utils
+- name: Install Arch packages and configure OS specific settings
+  include: archlinux.yml
+  when: ansible_distribution == 'Arch Linux'
 
 #- name: Allow and manage access on server
 #  ufw:
@@ -160,13 +138,6 @@
     - "{{ server_logrotate_conf }}"
   tags:
     - setup_logrotate
-
-- name: Check if machine required reboot
-  stat:
-    dest: /var/run/reboot-required
-  register: machine_reboot_required
-  tags:
-    - reboot_machine
 
 - name: Reboot a machine that might have lots of updates to apply
   reboot:
