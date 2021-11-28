@@ -133,7 +133,7 @@
     mode: 0644
   with_items:
     - "{{ server_logrotate_conf }}"
-  when: "server_logrotate_conf and server_logrotate_conf is not null"
+  when: server_logrotate_conf and server_logrotate_conf != None
   tags:
     - setup_logrotate
 
