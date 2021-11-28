@@ -40,16 +40,6 @@ server_securetty_content: |
   #tty8
 
 server_allowed_access:
-#  test:
-#    action: allow
-#    interface: eth0
-#    direction: in
-#    proto: udp
-#    src: 1.2.3.5
-#    from_port: 5469
-#    dest: 1.2.3.4
-#    to_port: 5469
-
   - action: allow
     interface: eth0
     direction: in

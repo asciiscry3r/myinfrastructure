@@ -61,9 +61,9 @@
     route: '{{ item.route }}'
   with_items:
     - "{{ server_allowed_access }}"
-  when: "server_allowed_access and server_allowed_access is not null"
+  when: server_allowed_access and server_allowed_access != None
   tags:
-    - manage_fiirewall
+    - manage_firewall
 
 - name: Set server hostname
   hostname:

@@ -21,7 +21,7 @@ variable "instance_type" {
 }
 
 variable "cidr_allowed_for_ssh" {
-  default = "37.19.218.166/32"
+  default = "0.0.0.0/0"
 }
 
 variable "encryption_state" {
