@@ -1,8 +1,10 @@
+// Copyright (C) 2021 by Klimenko Maxim Sergievich
+
 terraform {
   backend "s3" {
-    bucket = "myinfra-terraform-state-store"
-    key    = "us-east-1"
-    region = "us-east-1"
+    bucket = "mks-infra-terraform-state-store"
+    key    = "eu-central-1"
+    region = "eu-central-1"
   }
   required_providers {
     aws = {

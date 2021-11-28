@@ -1,3 +1,5 @@
+//Copyright (C) 2021 by Klimenko Maxim Sergievich
+
 data "aws_vpc" "nixos" {
   id = var.vpc_id_main
 }

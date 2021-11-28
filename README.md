@@ -70,3 +70,6 @@ Site: https://themes.getnikola.com/v8/hack/demo/pages/handbook/#all-you-need-to-
 
 _____________
 [He is LIVE!!!!](https://photos.app.goo.gl/L8TDwDuh3dGLK6V56)
+
+dd from device for diff with original firmware
+``

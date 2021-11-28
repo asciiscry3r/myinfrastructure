@@ -1,5 +1,7 @@
+// Copyright (C) 2021 by Klimenko Maxim Sergievich
+
 variable "aws_region" {
-  default = "us-east-1"
+  default = "eu-central-1"
 }
 
 variable "ec2_volume_size" {
@@ -11,7 +13,7 @@ variable "aws_zone_id" {
 }
 
 variable "vpc_id_main" {
-  default = "vpc-5b018826"
+  default = "vpc-096e5bbc5fbfa0ebc"
 }
 
 variable "instance_type" {
@@ -19,7 +21,7 @@ variable "instance_type" {
 }
 
 variable "cidr_allowed_for_ssh" {
-  default = "194.31.54.4/32"
+  default = "37.19.218.166/32"
 }
 
 variable "encryption_state" {
