@@ -27,7 +27,7 @@
     * prometheus exporter
     * prometheus server
 
-### IdeaPad Lenovo
+### IdeaPad Lenovo has been broken
 =======================
 
     * arch
