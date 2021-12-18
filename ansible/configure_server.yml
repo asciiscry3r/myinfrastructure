@@ -5,3 +5,9 @@
     - name: server_config
       become: yes
       become_user: root
+      tags: configure
+
+    - name: nginx
+      become: yes
+      become_user: root
+      tags: nginx
