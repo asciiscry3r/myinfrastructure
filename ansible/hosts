@@ -1,6 +1,6 @@
 
 [aws_server]
-mkswebtower.online ansible_host=18.158.177.0 ansible_connection=ssh ansible_user=ubuntu ansible_ssh_private_key_file=/home/max/GoogleDrive/Projects/myinfrastructure/terraform/id_rsa.pem
+mkswebtower.online ansible_host=3.123.79.120 ansible_connection=ssh ansible_user=ubuntu ansible_ssh_private_key_file=/home/max/GoogleDrive/Projects/myinfrastructure/terraform/web_server.pem
 
 #[personal_laptop]
 #mksideapad.local ansible_connection=local

@@ -4,10 +4,6 @@ variable "aws_region" {
   default = "eu-central-1"
 }
 
-variable "ec2_volume_size" {
-  default = 30
-}
-
 variable "aws_zone_id" {
   default = "Z04198522YOLQ6VGJR0UL"
 }
@@ -16,12 +12,8 @@ variable "vpc_id_main" {
   default = "vpc-096e5bbc5fbfa0ebc"
 }
 
-variable "instance_type" {
-  default = "t2.micro"
-}
-
 variable "cidr_allowed_for_ssh" {
-  default = "0.0.0.0/0"
+  default = ["0.0.0.0/0"]
 }
 
 variable "encryption_state" {
@@ -33,7 +25,7 @@ variable "deploy_nixos" {
 }
 
 variable "instance_tag_name" {
- default = "Web server"
+ default = "web_server"
 }
 
 variable "server_record_name" {
@@ -47,20 +39,3 @@ variable "server_record_type" {
 variable "server_record_ttl" {
   default = 300
 }
-
-//variable "servers_dns" {
-//  type = map(object({
-//    name = set(object({
-//      record_name = string
-//      record_type = string
-//      record_ttl  = number
-//    }))
-//  }))
-//  default = {
-//    server = {
-//      record_name = "mksplayground.online"
-//      record_type = "A"
-//      record_ttl = 300
-//    }
-//  }
-//}

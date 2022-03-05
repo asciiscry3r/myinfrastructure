@@ -3,7 +3,7 @@
 terraform {
   backend "s3" {
     bucket = "mks-infra-terraform-state-store"
-    key    = "web-eu-central-1"
+    key    = "eu-central-1"
     region = "eu-central-1"
   }
   required_providers {
