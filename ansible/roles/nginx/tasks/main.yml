@@ -22,4 +22,43 @@
   tags:
     - add_nginx
 
-- name: Configure Nginx
+- name: Install Nginx package
+  apt:
+    name: certbot
+    state: present
+  tags:
+    - add_nginx
+
+- name: Create directory
+  file:
+    dest: /etc/nginx/sites-enabled
+    state: directory
+  tags:
+    - add_nginx
+
+- name: Install Nginx default site
+  template:
+    src: default.conf.j2
+    dest: /etc/nginx/sites-enabled/default.conf
+    force: yes
+  tags:
+    - add_nginx
+    - configure
+
+- name: Validate config
+  shell: sudo nginx -t
+  tags:
+    - add_nginx
+    - configure
+
+#- name: Configure Nginx sites
+#  template:
+#    src: template.conf.j2
+#    dest: /etc/nginx/sites-enabled/"{{ item  }}".conf
+#    force: yes
+#    validate: nginx -t
+#  with_item:
+#    - "{{ nginx_templates }}"
+#  tags:
+#    - add_nginx
+#    - configure

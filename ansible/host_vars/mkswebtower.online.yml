@@ -2,7 +2,7 @@
 # Ubuntu server
 ---
 
-server_name: mksplayground.online
+server_name: mkswebtower.online
 server_timezone: "Europe/Kiev"
 server_admin_email: klimenkomaximsergievich@gmail.com
 journal_vacuum_size: "500M"
@@ -30,9 +30,9 @@ server_apps:
     state: present
 
 server_securetty_content: |
-  tty1
-  tty2
-  tty3
+  #tty1
+  #tty2
+  #tty3
   #tty4
   #tty5
   #tty6

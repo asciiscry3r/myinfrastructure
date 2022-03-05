@@ -1,0 +1,10 @@
+server {
+    listen       {{ nginx_templates.sslnginxport }};
+    server_name  {{ nginx_templates.dnsname }};
+
+    index index.html;
+
+    location / {
+        root   {{ nginx_templates.webroot }};
+    }
+}

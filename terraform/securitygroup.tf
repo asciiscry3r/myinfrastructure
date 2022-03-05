@@ -32,7 +32,7 @@ resource "aws_security_group" "nixos" {
 }
 
 resource "aws_security_group" "server" {
-  name        = "server_security_group"
+  name        = "${var.instance_tag_name}_security_group"
   description = "Allow inbound traffic"
   vpc_id      = data.aws_vpc.nixos.id
 
@@ -52,7 +52,7 @@ resource "aws_security_group" "server" {
   }
 
   tags = {
-    Name = "Server"
-    Env  = "mksplayground"
+    Name = var.instance_tag_name
+    Env  = var.server_record_name
   }
 }

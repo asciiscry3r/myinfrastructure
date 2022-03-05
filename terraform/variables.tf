@@ -9,7 +9,7 @@ variable "ec2_volume_size" {
 }
 
 variable "aws_zone_id" {
-  default = "Z08690643G2MCG6F1C5D7"
+  default = "Z04198522YOLQ6VGJR0UL"
 }
 
 variable "vpc_id_main" {
@@ -32,8 +32,12 @@ variable "deploy_nixos" {
   default = false
 }
 
+variable "instance_tag_name" {
+ default = "Web server"
+}
+
 variable "server_record_name" {
-  default = "mksplayground.online"
+  default = "mkswebtower.online"
 }
 
 variable "server_record_type" {

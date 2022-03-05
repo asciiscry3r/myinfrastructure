@@ -99,8 +99,8 @@ resource "aws_instance" "server" {
     volume_size = var.ec2_volume_size
 
     tags = {
-      Name = "Server"
-      Env  = "mksplayground"
+      Name = var.instance_tag_name
+      Env  = var.server_record_name
     }
   }
 
