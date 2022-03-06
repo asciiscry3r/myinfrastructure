@@ -81,6 +81,8 @@
 
 - name: Validate config
   shell: sudo nginx -t
+  notify: "restart nginx service"
   tags:
     - add_nginx
     - configure
+
