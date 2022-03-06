@@ -30,6 +30,26 @@ resource "aws_security_group" "server" {
   }
 }
 
+resource "aws_security_group_rule" "server_80" {
+  count             = (var.web_server_ingress != false ? 1 : 0 )
+  type              = "ingress"
+  from_port         = 0
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.server.id
+}
+
+resource "aws_security_group_rule" "server_443" {
+  count             = (var.web_server_ingress != false ? 1 : 0 )
+  type              = "ingress"
+  from_port         = 0
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.server.id
+}
+
 module "nixos_image" {
     source  = "git::https://github.com/tweag/terraform-nixos.git//aws_image_nixos?ref=5f5a0408b299874d6a29d1271e9bffeee4c9ca71"
     release = "20.09"

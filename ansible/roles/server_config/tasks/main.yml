@@ -51,14 +51,14 @@
 - name: Allow and manage access on server
   ufw:
     rule: '{{ item.action }}'
-    interface: '{{ item.interface }}'
+    interface: '{{ item.interface | default("eth0")}}'
     direction: '{{ item.direction }}'
     proto: '{{ item.proto }}'
-    src: '{{ item.src }}'
-    from_port: '{{ item.from_port }}'
-    dest: '{{ item.dest }}'
+    src: '{{ item.src | default("any") }}'
+    dest: '{{ item.dest | default("any") }}'
     to_port: '{{ item.to_port }}'
-    route: '{{ item.route }}'
+    route: '{{ item.route | default("no")}}'
+    delete: '{{ item.route | default("no")}}'
   with_items:
     - "{{ server_allowed_access }}"
   when: server_allowed_access and server_allowed_access != None

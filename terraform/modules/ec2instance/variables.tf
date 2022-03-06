@@ -31,3 +31,7 @@ variable "cidr_allowed_for_ssh" {
 variable "server_record_name" {
   default = "default"
 }
+
+variable "web_server_ingress" {
+  default = false
+}
