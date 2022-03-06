@@ -1,41 +1,13 @@
 // Copyright (C) 2022 by Klimenko Maxim Sergeevich
 
-data "aws_vpc" "nixos" {
+data "aws_vpc" "default" {
   id = var.vpc_id_main
 }
 
-resource "aws_security_group" "nixos" {
-  count       = (var.deploy_nixos != false ? 1 : 0 )
-  name        = "${var.instance_tag_name}_security_group"
-  description = "Allow inbound traffic"
-  vpc_id      = data.aws_vpc.nixos.id
-
-  ingress {
-    description      = "SSH from VPC"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = var.cidr_allowed_for_ssh
-  }
-
-  egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = var.instance_tag_name
-    Env  = var.server_record_name
-  }
-}
-
 resource "aws_security_group" "server" {
-  count       = (var.deploy_nixos != true ? 1 : 0 )
   name        = "${var.instance_tag_name}_security_group"
   description = "Allow inbound traffic"
-  vpc_id      = data.aws_vpc.nixos.id
+  vpc_id      = data.aws_vpc.default.id
 
   ingress {
     description      = "SSH from VPC"
@@ -65,6 +37,7 @@ module "nixos_image" {
 
 resource "tls_private_key" "state_ssh_key" {
     algorithm = "RSA"
+    rsa_bits  = "4096"
 }
 
 resource "local_file" "machine_ssh_key" {
@@ -97,7 +70,7 @@ resource "aws_instance" "nixos" {
     count           = (var.deploy_nixos != false ? 1 : 0 )
     ami             = module.nixos_image.ami
     instance_type   = var.instance_type
-    security_groups = [ aws_security_group.nixos[0].name ]
+    security_groups = [ aws_security_group.server.name ]
     key_name        = aws_key_pair.generated_key.key_name
 
     root_block_device {
@@ -151,7 +124,7 @@ resource "aws_instance" "server" {
   ami             = data.aws_ami.ubuntu.id
   instance_type   = var.instance_type
   key_name        = aws_key_pair.generated_key.key_name
-  security_groups = [ aws_security_group.server[count.index].name ]
+  security_groups = [ aws_security_group.server.name ]
 
   root_block_device {
     encrypted   = var.encryption_state

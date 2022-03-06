@@ -21,5 +21,13 @@ variable "deploy_nixos" {
 }
 
 variable "instance_tag_name" {
- default = "Web server"
+  default = "Web server"
+}
+
+variable "cidr_allowed_for_ssh" {
+  default = ["0.0.0.0/0"]
+}
+
+variable "server_record_name" {
+  default = "default"
 }
