@@ -1,12 +1,12 @@
 
 [uni_server]
-mkswebtower.online ansible_host=52.58.50.237 ansible_connection=ssh ansible_user=ubuntu ansible_ssh_private_key_file=/home/max/GoogleDrive/Development/myinfrastructure/terraform/modules/ec2instance/uni_server.pem
+mksscryertower.quest ansible_host=52.58.50.237 ansible_connection=ssh ansible_user=ubuntu ansible_ssh_private_key_file=/home/max/GoogleDrive/Development/myinfrastructure/terraform/modules/ec2instance/uni_server.pem
 
 [spec_server_2]
-spec_server_2 ansible_host=52.57.236.78 ansible_connection=ssh ansible_user=ubuntu ansible_ssh_private_key_file=/home/max/GoogleDrive/Development/myinfrastructure/terraform/modules/ec2instance/spec_server_2.pem
+spec_server_2
 
 [spec_server_1]
-spec_server_1 ansible_host=18.196.114.29 ansible_connection=ssh ansible_user=ubuntu ansible_ssh_private_key_file=/home/max/GoogleDrive/Development/myinfrastructure/terraform/modules/ec2instance/spec_server_1.pem
+spec_server_1
 
 [spec_server_3]
-spec_server_3 ansible_host=18.194.64.246 ansible_connection=ssh ansible_user=ubuntu ansible_ssh_private_key_file=/home/max/GoogleDrive/Development/myinfrastructure/terraform/modules/ec2instance/spec_server_3.pem
+spec_server_3

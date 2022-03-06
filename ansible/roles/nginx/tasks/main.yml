@@ -15,6 +15,13 @@
   tags:
     - add_repository
 
+- name: Added Ubuntu Certbot repository
+  apt_repository:
+    repo: deb https://ppa.launchpadcontent.net/certbot/certbot/ubuntu bionic main
+    state: present
+  tags:
+    - add_repository
+
 - name: Install Nginx package
   apt:
     name: nginx
@@ -24,23 +31,50 @@
 
 - name: Install Nginx package
   apt:
-    name: certbot
+    name: "{{ item }}"
     state: present
+  with_items:
+    - certbot
+    - python-certbot-nginx
   tags:
     - add_nginx
 
-- name: Create directory
+- name: Create directory for site configs
   file:
     dest: /etc/nginx/sites-enabled
     state: directory
   tags:
     - add_nginx
 
+- name: Create directory for site data
+  file:
+    dest: /var/www
+    state: directory
+    owner: nginx
+  tags:
+    - add_nginx
+
+- name: Create main config
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    force: yes
+  tags:
+    - add_nginx
+
 - name: Install Nginx default site
   template:
-    src: default.conf.j2
-    dest: /etc/nginx/sites-enabled/default.conf
+    src: "{{ item }}"
+    dest: /etc/nginx/sites-enabled/{{ item | basename | regex_replace('\.j2$', '') }}
     force: yes
+  with_items:
+    - "{{ lookup('fileglob', '{{role_path}}/templates/*.site.conf.j2', wantlist=True) }}"
+  tags:
+    - add_nginx
+    - configure
+
+- name: Create ssl certificate
+  shell: sudo certbot certonly --nginx -n -m {{ server_admin_email }} --agree-tos -d {{ server_name }}
   tags:
     - add_nginx
     - configure
@@ -50,15 +84,3 @@
   tags:
     - add_nginx
     - configure
-
-#- name: Configure Nginx sites
-#  template:
-#    src: template.conf.j2
-#    dest: /etc/nginx/sites-enabled/"{{ item  }}".conf
-#    force: yes
-#    validate: nginx -t
-#  with_item:
-#    - "{{ nginx_templates }}"
-#  tags:
-#    - add_nginx
-#    - configure
