@@ -1,0 +1,14 @@
+server {
+    listen              443 ssl;
+    server_name         {{ server_name }};
+    index               index.html;
+    root                {{ server_root_folder }};
+    ssl_certificate     /etc/letsencrypt/live/{{ server_name }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ server_name }}/privkey.pem;
+    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+
+    location / {
+
+    }
+}

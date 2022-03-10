@@ -15,6 +15,13 @@
   tags:
     - add_repository
 
+- name: Download Nginx key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 7BF576066ADA65728FC7E70A8C47BE8E75BCA694
+  tags:
+    - add_repository
+
 - name: Added Ubuntu Certbot repository
   apt_repository:
     repo: deb https://ppa.launchpadcontent.net/certbot/certbot/ubuntu bionic main
@@ -62,6 +69,20 @@
   tags:
     - add_nginx
 
+- name: Create Letsencrypt dir
+  file:
+    dest: /etc/letsencrypt/live/
+    state: directory
+  tags:
+    - add_nginx
+    - configure
+
+- name: Create ssl certificate
+  shell: sudo certbot certonly --nginx -n -m {{ server_admin_email }} --agree-tos -d {{ server_name }}
+  tags:
+    - add_nginx
+    - configure
+
 - name: Install Nginx default site
   template:
     src: "{{ item }}"
@@ -73,8 +94,25 @@
     - add_nginx
     - configure
 
-- name: Create ssl certificate
-  shell: sudo certbot certonly --nginx -n -m {{ server_admin_email }} --agree-tos -d {{ server_name }}
+- name: Create test site dir
+  file:
+    dest: "{{ server_root_folder }}"
+    state: directory
+    recurse: yes
+    owner: nginx
+    group: nginx
+    mode: 0755
+  tags:
+    - add_nginx
+    - configure
+
+- name: Added test site code
+  copy:
+    src: index.html
+    dest: "{{ server_root_folder }}/index.html"
+    owner: nginx
+    group: nginx
+    mode: 0644
   tags:
     - add_nginx
     - configure

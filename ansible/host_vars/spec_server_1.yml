@@ -44,7 +44,7 @@ server_securetty_content: |
   #tty8
 
 server_allowed_access:
-  - action: allow
+  - action: deny
     interface: eth0
     direction: in
     proto: udp
