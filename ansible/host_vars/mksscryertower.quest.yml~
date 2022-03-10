@@ -3,6 +3,7 @@
 ---
 
 server_name: mksscryertower.quest
+server_root_folder: /var/www/mkssite
 server_timezone: "Europe/Kiev"
 server_admin_email: klimenkomaximsergievich@gmail.com
 journal_vacuum_size: "500M"

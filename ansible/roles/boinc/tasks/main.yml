@@ -1,0 +1,35 @@
+---
+# tasks file for boinc
+
+- name: Install packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - boinc-client
+    - boinctui
+    - virtualbox
+    - virtualbox-dkms
+  register: virtualbox_install
+  tags:
+    - install_packages
+
+- name: Enable boinc service
+  shell: sudo systemctl enable boinc-client.service
+  tags:
+    - install_packages
+
+- name: Start boinc service
+  service:
+    name: boinc-client.service
+    state: started
+  tags:
+    - install_packages
+
+- name: Reboot a machine 
+  reboot:
+    reboot_timeout: 3600
+  when: virtualbox_install is changed or machine_reboot_required.stat.exists
+  tags:
+    - reboot_machine
+
