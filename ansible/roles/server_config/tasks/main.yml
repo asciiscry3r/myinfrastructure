@@ -152,6 +152,22 @@
   tags:
     - server_megumin_attack
 
+- name: Create script
+  copy:
+    content: "{{ script_content_mirgorod }}"
+    dest: /home/ubuntu/hpingscriptmirgorod.sh
+  when: server_megumin_attack
+  tags:
+    - server_megumin_attack
+
+- name: Create script
+  copy:
+    content: "{{ script_content_sci }}"
+    dest: /home/ubuntu/hpingscriptscientologymustdie.sh
+  when: server_megumin_attack
+  tags:
+    - server_megumin_attack
+
 # ANSIBLE SESSION CRASH SCRIPT PROCESS
 
 - name: hping attack
