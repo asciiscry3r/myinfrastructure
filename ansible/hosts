@@ -1,6 +1,6 @@
 
 [uni_server]
-mksscryertower.quest ansible_host=52.58.50.237 ansible_connection=ssh ansible_user=ubuntu ansible_ssh_private_key_file=/home/max/GoogleDrive/Development/myinfrastructure/terraform/modules/ec2instance/uni_server.pem
+uni_server
 
 [spec_server_2]
 spec_server_2
