@@ -77,11 +77,11 @@
     - add_nginx
     - configure
 
-- name: Create ssl certificate
-  shell: sudo certbot certonly --nginx -n -m {{ server_admin_email }} --agree-tos -d {{ server_name }}
-  tags:
-    - add_nginx
-    - configure
+#- name: Create ssl certificate
+#  shell: sudo certbot certonly --nginx -n -m {{ server_admin_email }} --agree-tos -d {{ server_name }}
+#  tags:
+#    - add_nginx
+#    - configure
 
 - name: Install Nginx default site
   template:
@@ -117,9 +117,9 @@
     - add_nginx
     - configure
 
-- name: Validate config
-  shell: sudo killall nginx && sudo nginx -t
-  notify: "restart nginx service"
-  tags:
-    - add_nginx
-    - configure
+#- name: Validate config
+#  shell: sudo killall nginx && sudo nginx -t
+#  notify: "restart nginx service"
+#  tags:
+#    - add_nginx
+#    - configure

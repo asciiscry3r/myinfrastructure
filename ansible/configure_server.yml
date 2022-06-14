@@ -19,4 +19,9 @@
       become: yes
       become_user: root
       tags: boinc
+    - name: openvpn
+      become: yes
+      become_user: root
+      tags: openvpn
+
 
