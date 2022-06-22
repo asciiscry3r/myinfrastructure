@@ -42,7 +42,6 @@ server_apps:
   - name: lolcat
     state: present
 
-
 server_securetty_content: |
   #tty1
   #tty2

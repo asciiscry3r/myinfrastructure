@@ -1,0 +1,28 @@
+#######################################################################
+# Openvpn
+---
+
+- name: Install Wireguard package
+  apt:
+    name: "{{ item  }}"
+    state: present
+  with_items:
+    - wireguard
+  tags:
+    - add_wireguard
+
+#
+#    ip address add dev wg0 192.168.3.1/24
+#    ip address add dev wg0 192.168.3.1 peer 192.168.3.2
+#
+
+- name: Create Wireguard Interface
+  shell: |
+    ip link add dev wg0 type wireguard
+    ip address add dev wg0 {{ wireguard_network_cidr }}
+    ip address add dev wg0 {{ wireguard_network_main }} peer {{ wireguard_network_peer }}
+    wg genkey > privatekey
+    wg genpsk > presharedkey
+    wg set wg0 listen-port {{ wireguard_port }} private-key privatekey peer $(cat privatekey | wg pubkey) allowed-ips 0.0.0.0/0 endpoint {{ ansible_host }}:{{ wireguard_port }}
+  tags:
+    - add_wireguardo
