@@ -33,21 +33,6 @@
   include: archlinux.yml
   when: ansible_distribution == 'Arch Linux'
 
-#- name: Allow and manage access on server
-#  ufw:
-#    rule: '{{ item.value.action }}'
-#    interface: '{{ item.value.interface }}'
-#    direction: '{{ item.value.direction }}'
-#    proto: '{{ item.value.proto }}'
-#    src: '{{ item.value.src }}'
-#    from_port: '{{ item.value.from_port }}'
-#    dest: '{{ item.value.dest }}'
-#    to_port: '{{ item.value.to_port }}'
-#  with_dict:
-#    - "{{ server_allowed_access }}"
-#  tags:
-#    - manage_fiirewall
-
 - name: Allow and manage access on server
   ufw:
     rule: '{{ item.action }}'
@@ -148,3 +133,23 @@
   when: server_system_upgrades is changed or server_system_hostname is changed or machine_reboot_required.stat.exists
   tags:
     - reboot_machine
+
+#- name: Added pam module 
+#  template:
+#    src: sshd_pam.j2
+#    dest: /etc/pam.d/sshd
+#    owner: root
+#    group: root
+#    mode: 0644
+#  tags:
+#    - google-authenticator
+
+#- name: Added sshd config
+#  template:
+#    src: sshd.j2
+#    dest: /etc/ssh/sshd_config
+#    owner: root
+#    group: root
+#    mode: 0644
+#  tags:
+#    - google-authenticator
