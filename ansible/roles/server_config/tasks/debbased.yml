@@ -42,7 +42,7 @@
 - name: Added sshd config
   template:
     src: sshd.j2
-    dest: /etc/sshd/sshd_config
+    dest: /etc/ssh/sshd_config
     owner: root
     group: root
     mode: 0644
