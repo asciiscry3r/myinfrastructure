@@ -33,6 +33,14 @@ server_apps:
     state: present
   - name: sslh
     state: present
+  - name: libpam-google-authenticator
+    state: present
+  - name: fortune-mod
+    state: present
+  - name: cowsay
+    state: present
+  - name: lolcat
+    state: present
 
 
 server_securetty_content: |

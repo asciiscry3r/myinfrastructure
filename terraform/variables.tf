@@ -12,10 +12,6 @@ variable "vpc_id_main" {
   default = "vpc-096e5bbc5fbfa0ebc"
 }
 
-variable "cidr_allowed_for_ssh" {
-  default = ["0.0.0.0/0"]
-}
-
 variable "encryption_state" {
   default = true
 }
@@ -38,4 +34,8 @@ variable "server_record_type" {
 
 variable "server_record_ttl" {
   default = 300
+}
+
+variable "cidr_allowed_for_ssh" {
+  default = "195.64.182.160/32"
 }

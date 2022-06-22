@@ -3,3 +3,4 @@
 .terraform.lock.hcl
 **/*.pem
 terraform/modules/ec2instance/*.pem
+terraform/modules/ec2instance/uni_server.pem

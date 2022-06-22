@@ -21,6 +21,26 @@
   tags:
     - manage_packages
 
+- name: Added pam module 
+  template:
+    src: sshd_pam.j2
+    dest: /etc/pam.d/sshd
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - google-authenticator
+
+- name: Added sshd config
+  template:
+    src: sshd.j2
+    dest: /etc/sshd/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - google-authenticator
+
 - name: Install apparmor profiles and system utils
   apt:
     pkg: "{{ item }}"

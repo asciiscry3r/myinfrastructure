@@ -11,7 +11,7 @@ module "deploy_uni_server" {
     instance_type = "t2.micro"
     vpc_id_main = "vpc-096e5bbc5fbfa0ebc"
     ec2_volume_size = "30"
-    cidr_allowed_for_ssh = ["0.0.0.0/0"]
+    cidr_allowed_for_ssh = [ var.cidr_allowed_for_ssh ]
     server_record_name = "mksscryertower.quest"
     web_server_ingress = true
 }
@@ -27,7 +27,7 @@ module "deploy_spec_server_1" {
     instance_type = "t2.micro"
     vpc_id_main = "vpc-096e5bbc5fbfa0ebc"
     ec2_volume_size = "30"
-    cidr_allowed_for_ssh = ["0.0.0.0/0"]
+    cidr_allowed_for_ssh = [ var.cidr_allowed_for_ssh ]
     server_record_name = "temporary_didos_server"
     web_server_ingress = false
 }
@@ -43,7 +43,7 @@ module "deploy_spec_server_2" {
     instance_type = "t2.micro"
     vpc_id_main = "vpc-096e5bbc5fbfa0ebc"
     ec2_volume_size = "30"
-    cidr_allowed_for_ssh = ["0.0.0.0/0"]
+    cidr_allowed_for_ssh = [ var.cidr_allowed_for_ssh ]
     server_record_name = "temporary_didos_server"
     web_server_ingress = false
 }
@@ -59,7 +59,7 @@ module "deploy_spec_server_3" {
     instance_type = "t2.micro"
     vpc_id_main = "vpc-096e5bbc5fbfa0ebc"
     ec2_volume_size = "30"
-    cidr_allowed_for_ssh = ["0.0.0.0/0"]
+    cidr_allowed_for_ssh = [ var.cidr_allowed_for_ssh ]
     server_record_name = "temporary_didos_server"
     web_server_ingress = false
 }
