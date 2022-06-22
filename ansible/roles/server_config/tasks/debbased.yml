@@ -21,6 +21,14 @@
   tags:
     - manage_packages
 
+- name: Added candys to bash
+  lineinfile:
+    path: .bashrc
+    state: present
+    line: 'fortune | cowsay -f tux | lolcat'
+  tags:
+    - google-authenticator
+    
 - name: Added pam module 
   template:
     src: sshd_pam.j2
