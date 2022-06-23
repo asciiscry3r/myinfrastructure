@@ -21,6 +21,14 @@
   tags:
     - manage_packages
 
+- name: Added umask to bash
+  lineinfile:
+    path: .bashrc
+    state: present
+    line: 'umask 027'
+  tags:
+    - google-authenticator
+
 - name: Added candys to bash
   lineinfile:
     path: .bashrc

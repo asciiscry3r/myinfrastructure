@@ -25,6 +25,16 @@
   tags:
     - firewall
 
+- name: Swap creating
+  shell: |
+    sudo fallocate -l 4G /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+    echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+  tags:
+    - createswap
+
 - name: Install Ubuntu/Debian packages and configure OS specific settings
   include: debbased.yml
   when: ansible_distribution == 'Ubuntu'
@@ -98,11 +108,33 @@
   debug:
     var: apparmor_enforce_output
 
-- name: Create securetty file
+- name: Delete existing entries in fstab | tmp
+  lineinfile:
+    path: /etc/fstab
+    state: absent
+    regexp: '\/tmp'
+
+- name: Delete existing entries in fstab | shm
+  lineinfile:
+    path: /etc/fstab
+    state: absent
+    regexp: '\/shm'
+
+- name: Modify fstab - add shm
+  lineinfile:
+    path: /etc/fstab
+    line: 'tmpfs /dev/shm tmpfs defaults,noatime,nodev,nosuid,mode=1777 0 0'
+
+- name: Modify fstab - add tmp
+  lineinfile:
+    path: /etc/fstab
+    line: 'tmpfs /tmp tmpfs defaults,noatime,nodev,nosuid,mode=1777 0 0'
+
+- name: Delete securetty file
   file:
     path: /etc/securetty
     state: absent
-    
+
 - name: Create securetty file
   file:
     path: /etc/securetty
