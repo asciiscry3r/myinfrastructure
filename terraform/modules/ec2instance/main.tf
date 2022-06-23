@@ -4,6 +4,10 @@ data "aws_vpc" "default" {
   id = var.vpc_id_main
 }
 
+data "aws_arch_ami" "ami" {
+  id = var.arch_ami_id
+}
+
 resource "aws_security_group" "server" {
   name        = "${var.instance_tag_name}_security_group"
   description = "Allow inbound traffic"
@@ -77,7 +81,7 @@ resource "aws_key_pair" "generated_key" {
 }
 
 resource "aws_kms_key" "encrypt" {
-    count       = (var.encryption_state != false ? 1 : 0 )
+    count       = ( var.encryption_state != false ? 1 : 0 )
     description = "instances crypto key"
 
     tags = {
@@ -87,7 +91,7 @@ resource "aws_kms_key" "encrypt" {
 }
 
 resource "aws_instance" "nixos" {
-    count           = (var.deploy_nixos != false ? 1 : 0 )
+    count           = ( var.deploy_nixos != false ? 1 : 0 )
     ami             = module.nixos_image.ami
     instance_type   = var.instance_type
     security_groups = [ aws_security_group.server.name ]
@@ -115,7 +119,7 @@ resource "aws_instance" "nixos" {
 //│ .terraform/modules/deploy_nixos/deploy_nixos/nixos-instantiate.sh: line 44: nix-instantiate: command not foundmo
 
 module "deploy_nixos" {
-    count       = (var.deploy_nixos != false ? 1 : 0 )
+    count       = ( var.deploy_nixos != false ? 1 : 0 )
     source = "git::https://github.com/tweag/terraform-nixos.git//deploy_nixos?ref=5f5a0408b299874d6a29d1271e9bffeee4c9ca71"
     nixos_config = "${path.module}/../nixos/configuration.nix"
     target_host = aws_instance.nixos[count.index].public_ip
@@ -139,8 +143,31 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"]
 }
 
+resource "aws_instance" "arch_server" {
+  count           = ( var.deploy_arch != true ? 1 : 0 )
+  ami             = data.aws_arch_ami.ami.id
+  instance_type   = var.instance_type
+  key_name        = aws_key_pair.generated_key.key_name
+  security_groups = [ aws_security_group.server.name ]
+
+  root_block_device {
+    encrypted   = var.encryption_state
+    volume_size = var.ec2_volume_size
+
+    tags = {
+      Name = var.instance_tag_name
+      Env  = var.server_record_name
+    }
+  }
+
+  tags = {
+    Name = var.instance_tag_name
+    Env  = var.server_record_name
+  }
+}
+
 resource "aws_instance" "server" {
-  count           = (var.deploy_nixos != true ? 1 : 0 )
+  count           = ( var.deploy_ubuntu != true ? 1 : 0 ) 
   ami             = data.aws_ami.ubuntu.id
   instance_type   = var.instance_type
   key_name        = aws_key_pair.generated_key.key_name
@@ -163,7 +190,7 @@ resource "aws_instance" "server" {
 }
 
 resource "aws_eip" "server" {
-  count           = (var.deploy_nixos != true ? 1 : 0 )
+  count           = ( var.deploy_nixos != true ? 1 : 0 )
   instance = aws_instance.server[count.index].id
   vpc      = true
 

@@ -20,6 +20,18 @@ variable "deploy_nixos" {
   default = false
 }
 
+variable "deploy_arch" {
+  default = false
+}
+
+variable "deploy_ubuntu" {
+  default = false
+}
+
+variable "arch_ami_id" {
+  default = "ami-0f670c4daa876739f"
+}
+
 variable "instance_tag_name" {
   default = "Web server"
 }
