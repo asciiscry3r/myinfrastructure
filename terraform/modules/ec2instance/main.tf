@@ -4,10 +4,6 @@ data "aws_vpc" "default" {
   id = var.vpc_id_main
 }
 
-data "aws_arch_ami" "ami" {
-  id = var.arch_ami_id
-}
-
 resource "aws_security_group" "server" {
   name        = "${var.instance_tag_name}_security_group"
   description = "Allow inbound traffic"
@@ -144,8 +140,8 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "arch_server" {
-  count           = ( var.deploy_arch != true ? 1 : 0 )
-  ami             = data.aws_arch_ami.ami.id
+  count           = ( var.deploy_arch == true ? 1 : 0 )
+  ami             = var.aws_arch_ami
   instance_type   = var.instance_type
   key_name        = aws_key_pair.generated_key.key_name
   security_groups = [ aws_security_group.server.name ]
@@ -166,8 +162,20 @@ resource "aws_instance" "arch_server" {
   }
 }
 
+
+resource "aws_eip" "arch_server" {
+  count    = ( var.deploy_arch == true ? 1 : 0 )
+  instance = aws_instance.arch_server[count.index].id
+  vpc      = true
+
+  tags = {
+    Name = var.instance_tag_name
+    Env  = var.server_record_name
+  }
+}
+
 resource "aws_instance" "server" {
-  count           = ( var.deploy_ubuntu != true ? 1 : 0 ) 
+  count           = ( var.deploy_ubuntu == true ? 1 : 0 ) 
   ami             = data.aws_ami.ubuntu.id
   instance_type   = var.instance_type
   key_name        = aws_key_pair.generated_key.key_name
@@ -190,7 +198,7 @@ resource "aws_instance" "server" {
 }
 
 resource "aws_eip" "server" {
-  count           = ( var.deploy_nixos != true ? 1 : 0 )
+  count    = ( var.deploy_ubuntu == true ? 1 : 0 )
   instance = aws_instance.server[count.index].id
   vpc      = true
 

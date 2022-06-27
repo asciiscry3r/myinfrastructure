@@ -1,7 +1,7 @@
 // Copyright (C) 2022 by Klimenko Maxim Sergeevich
 
-data "aws_arch_ami" "ami" {
-  id = "ami-0f670c4daa876739f"
+locals {
+  aws_arch_ami = "ami-0f670c4daa876739f"
 }
 
 module "deploy_uni_server" {
@@ -9,9 +9,9 @@ module "deploy_uni_server" {
 
     instance_tag_name = "uni_server"
     deploy_nixos = false
-    deploy_ubuntu = true
-    deploy_arch = false
-    aws_arch_ami = data.aws_arch_ami.ami.id
+    deploy_ubuntu = false
+    deploy_arch = true
+    aws_arch_ami = local.aws_arch_ami
     encryption_state = true
     instance_type = "t2.micro"
     vpc_id_main = "vpc-096e5bbc5fbfa0ebc"
@@ -28,6 +28,7 @@ module "deploy_spec_server_1" {
     deploy_nixos = false
     deploy_ubuntu = true
     deploy_arch = false
+    aws_arch_ami = local.aws_arch_ami
     encryption_state = true
     instance_type = "t2.micro"
     vpc_id_main = "vpc-096e5bbc5fbfa0ebc"
@@ -44,6 +45,7 @@ module "deploy_spec_server_2" {
     deploy_nixos = false
     deploy_ubuntu = true
     deploy_arch = false
+    aws_arch_ami = local.aws_arch_ami
     encryption_state = true
     instance_type = "t2.micro"
     vpc_id_main = "vpc-096e5bbc5fbfa0ebc"
@@ -60,6 +62,7 @@ module "deploy_spec_server_3" {
     deploy_nixos = false
     deploy_ubuntu = true
     deploy_arch = false
+    aws_arch_ami = local.aws_arch_ami
     encryption_state = true
     instance_type = "t2.micro"
     vpc_id_main = "vpc-096e5bbc5fbfa0ebc"

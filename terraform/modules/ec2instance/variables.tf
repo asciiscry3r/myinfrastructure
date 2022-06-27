@@ -25,10 +25,10 @@ variable "deploy_arch" {
 }
 
 variable "deploy_ubuntu" {
-  default = false
+  default = true
 }
 
-variable "arch_ami_id" {
+variable "aws_arch_ami" {
   default = "ami-0f670c4daa876739f"
 }
 
