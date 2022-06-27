@@ -1,6 +1,6 @@
 ---
 
-- name: Get system upgrades
+- name: Get system upgrades | Ubuntu
   apt:
     upgrade: dist
     update_cache: yes
@@ -10,7 +10,7 @@
     - update_server
     - reboot_machine
 
-- name: Install user defined packages
+- name: Install user defined packages | Ubuntu
   apt:
     pkg: '{{ item.name }}'
     update_cache: yes
@@ -21,7 +21,7 @@
   tags:
     - manage_packages
 
-- name: Added umask to bash
+- name: Added umask to bash | Ubuntu
   lineinfile:
     path: .bashrc
     state: present
@@ -29,7 +29,7 @@
   tags:
     - google-authenticator
 
-- name: Added candys to bash
+- name: Added candys to bash | Ubuntu
   lineinfile:
     path: .bashrc
     state: present
@@ -37,7 +37,7 @@
   tags:
     - google-authenticator
 
-- name: Install apparmor profiles and system utils
+- name: Install apparmor profiles and system utils | Ubuntu
   apt:
     pkg: "{{ item }}"
     update_cache: yes
@@ -47,7 +47,7 @@
     - apparmor-profiles-extra
     - apparmor-utils
 
-- name: Check if machine required reboot
+- name: Check if machine required reboot | Ubuntu
   stat:
     dest: /var/run/reboot-required
   register: machine_reboot_required

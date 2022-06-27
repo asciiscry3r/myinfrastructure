@@ -3,11 +3,30 @@
 - debug:
     var: "{{ inventory_hostname }}"
 
-- name: Allow incoming SSH conection
+- name: Print all available facts
+  debug:
+    var: ansible_facts
+    
+- name: Install ufw package
+  package:
+    name: ufw
+  when: "'local' not in inventory_hostname"
+  tags:
+    - firewall
+    
+- name: Allow incoming SSH conection | Ubuntu
   ufw:
     rule: allow
     name: OpenSSH
-  when: "'local' not in inventory_hostname"
+  when: ('local' not in inventory_hostname and ansible_distribution == 'Ubuntu')
+  tags:
+    - firewall
+
+- name: Allow incoming SSH conection | Arch
+  ufw:
+    rule: allow
+    name: SSH
+  when: ('local' not in inventory_hostname and ansible_distribution == 'Archlinux')
   tags:
     - firewall
 
@@ -41,7 +60,7 @@
 
 - name: Install Arch packages and configure OS specific settings
   include: archlinux.yml
-  when: ansible_distribution == 'Arch Linux'
+  when: ansible_distribution == 'Archlinux'
 
 - name: Allow and manage access on server
   ufw:
@@ -98,16 +117,6 @@
   debug:
     var: journactloutput
 
-- name: Apply enforce policy to all profiles
-  shell: aa-enforce /etc/apparmor.d/*
-  register: apparmor_enforce_output
-  tags:
-    - enforce_apparmor_profiles
-
-- name: Display aa-enforce output
-  debug:
-    var: apparmor_enforce_output
-
 - name: Delete existing entries in fstab | tmp
   lineinfile:
     path: /etc/fstab
@@ -158,6 +167,16 @@
   when: server_logrotate_conf and server_logrotate_conf != None
   tags:
     - setup_logrotate
+
+- name: Apply enforce policy to all profiles
+  shell: aa-enforce /etc/apparmor.d/*
+  register: apparmor_enforce_output
+  tags:
+    - enforce_apparmor_profiles
+
+- name: Display aa-enforce output
+  debug:
+    var: apparmor_enforce_output
 
 - name: Reboot a machine that might have lots of updates to apply
   reboot:
