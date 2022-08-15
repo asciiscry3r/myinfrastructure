@@ -7,7 +7,18 @@
     name: "{{ item  }}"
     state: present
   with_items:
+    - wireguard-tools
+  when: ansible_distribution == 'Archlinux'
+  tags:
+    - add_wireguard
+
+- name: Install Wireguard package
+  package:
+    name: "{{ item  }}"
+    state: present
+  with_items:
     - wireguard
+  when: ansible_distribution == 'Ubuntu'
   tags:
     - add_wireguard
 
