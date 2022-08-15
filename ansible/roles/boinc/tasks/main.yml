@@ -1,6 +1,18 @@
 ---
 # tasks file for boinc
 
+
+- name: Install packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - boinc
+    - boinctui
+  when: ansible_distribution == 'Archlinux'
+  tags:
+    - install_packages
+
 - name: Install packages
   package:
     name: "{{ item }}"
@@ -8,7 +20,7 @@
   with_items:
     - boinc-client
     - boinctui
-  register: virtualbox_install
+  when: ansible_distribution == 'Ubuntu'
   tags:
     - install_packages
 

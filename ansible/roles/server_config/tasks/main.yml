@@ -170,6 +170,7 @@
 
 - name: Apply enforce policy to all profiles
   shell: aa-enforce /etc/apparmor.d/*
+  ignore_errors: True
   register: apparmor_enforce_output
   tags:
     - enforce_apparmor_profiles

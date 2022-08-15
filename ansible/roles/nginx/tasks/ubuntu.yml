@@ -1,0 +1,45 @@
+---
+- name: Added key for Nginx
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: ABF5BD827BD9BF62
+  tags:
+    - add_repository
+
+- name: Added Ubuntu Nginx repository
+  apt_repository:
+    repo: deb https://nginx.org/packages/ubuntu/ "{{ ansible_distribution_release }}" nginx
+    state: present
+  tags:
+    - add_repository
+
+- name: Download Nginx key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 7BF576066ADA65728FC7E70A8C47BE8E75BCA694
+  tags:
+    - add_repository
+
+- name: Added Ubuntu Certbot repository
+  apt_repository:
+    repo: deb https://ppa.launchpadcontent.net/certbot/certbot/ubuntu bionic main
+    state: present
+  tags:
+    - add_repository
+
+- name: Install Nginx package
+  apt:
+    name: nginx
+    state: present
+  tags:
+    - add_nginx
+
+- name: Install Nginx package
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - certbot
+    - python-certbot-nginx
+  tags:
+    - add_nginx

@@ -1,0 +1,11 @@
+---
+- name: Install apparmor profiles and system utils | Arch
+  pacman:
+    pkg: '{{ item }}'
+    update_cache: yes
+    state: latest
+  with_items:
+    - nginx
+  tags:
+    - update_server
+
