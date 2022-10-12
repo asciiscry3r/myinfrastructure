@@ -1,5 +1,5 @@
 ---
-- name: Install apparmor profiles and system utils | Arch
+- name: Install Nginx and system utils | Arch
   pacman:
     pkg: '{{ item }}'
     update_cache: yes

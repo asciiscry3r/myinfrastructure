@@ -2,7 +2,7 @@
 # Ubuntu server
 ---
 
-server_name: mksscryertower.quest
+server_name: info.mksscryertower.quest
 server_root_folder: /var/www/mkssite
 server_web_user: www-data
 server_timezone: "Europe/Kiev"
