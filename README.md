@@ -27,16 +27,6 @@
     * prometheus exporter
     * prometheus server
 
-### IdeaPad Lenovo has been broken
-=======================
-
-    * arch
-    * encrypted
-    * ansible CM
-    * python scripts ?
-    * prometheus exporter
-    * optional Grafana
-
 ### TP Link Archer C7
 ========================
 
@@ -56,11 +46,6 @@
     * service vpn fot monitoring
     * grafana
     * prometheus exporter
-
-To Do
-===========================
-
-    * nested map in terraform
 
 ___________
 
