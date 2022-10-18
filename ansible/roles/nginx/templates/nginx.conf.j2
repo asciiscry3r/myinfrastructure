@@ -3,7 +3,6 @@ user  {{ server_web_user }};
 worker_processes  auto;
 
 error_log  /var/log/nginx/error.log notice;
-# pid        /var/run/nginx.pid;
 
 
 events {
@@ -29,7 +28,7 @@ http {
     #gzip on;
 
     types_hash_max_size 2048;
-    types_hash_bucket_size 4096;
+    types_hash_bucket_size 8192;
 
     include /etc/nginx/conf.d/*.conf;
     include /etc/nginx/sites-enabled/*.conf;
