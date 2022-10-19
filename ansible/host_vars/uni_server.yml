@@ -3,7 +3,7 @@
 ---
 
 server_name: mksscryertower.quest
-server_root_folder: /var/www/mkssite
+server_root_folder: /var/www/mksscryertower.quest
 server_web_user: www-data
 server_timezone: "Europe/Kiev"
 server_admin_email: klimenkomaximsergievich@gmail.com
