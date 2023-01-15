@@ -44,6 +44,10 @@ server_apps:
     state: present
   - name: prometheus
     state: present
+  - name: lkrg-dkms
+    state: present
+  - name: yay-bin
+    state: present
 
 server_securetty_content: |
   #tty1
