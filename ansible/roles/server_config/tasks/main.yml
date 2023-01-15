@@ -203,7 +203,7 @@
 - name: Allow and manage access on server
   ufw:
     rule: '{{ item.action }}'
-    interface: '{{ item.interface }}'
+ #   interface: '{{ item.interface }}'
     direction: '{{ item.direction }}'
     proto: '{{ item.proto }}'
     src: '{{ item.src | default("any") }}'

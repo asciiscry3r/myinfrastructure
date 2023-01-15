@@ -1,7 +1,7 @@
 // Copyright (C) 2022 by Klimenko Maxim Sergeevich
 
 locals {
-  aws_arch_ami = "ami-0c05c50bcfb6ea1d9"
+  aws_arch_ami = "ami-0185d998a628da704"
   // ami-0f670c4daa876739f
 }
 
@@ -14,7 +14,7 @@ module "deploy_uni_server" {
     deploy_arch = true
     aws_arch_ami = local.aws_arch_ami
     encryption_state = true
-    instance_type = "t2.micro"
+    instance_type = "t2.medium"
     vpc_id_main = "vpc-096e5bbc5fbfa0ebc"
     ec2_volume_size = "30"
     cidr_allowed_for_ssh = [ var.cidr_allowed_for_ssh ]
