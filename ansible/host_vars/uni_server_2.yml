@@ -42,6 +42,8 @@ server_apps:
     state: present
   - name: lolcat
     state: present
+  - name: grafana
+    state: present
 
 server_securetty_content: |
   #tty1

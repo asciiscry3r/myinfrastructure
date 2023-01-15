@@ -23,3 +23,19 @@
       become: yes
       become_user: root
       tags: wireguard
+
+- hosts: uni_server_2
+
+  roles:
+    - name: nginx
+      become: yes
+      become_user: root
+      tags: nginx
+    - name: boinc
+      become: yes
+      become_user: root
+      tags: boinc
+    - name: wireguard
+      become: yes
+      become_user: root
+      tags: wireguard

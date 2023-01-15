@@ -7,6 +7,16 @@
   debug:
     var: ansible_facts
 
+- name: Modify resolv.conf
+  lineinfile:
+    path: /etc/resolv.conf
+    line: 'nameserver 8.8.8.8'
+
+- name: Modify resolv.conf
+  lineinfile:
+    path: /etc/resolv.conf
+    line: 'nameserver 1.1.1.1'
+
 - name: Install Ubuntu/Debian packages and configure OS specific settings
   include: debbased.yml
   when: ansible_distribution == 'Ubuntu'
