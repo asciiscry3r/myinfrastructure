@@ -95,6 +95,11 @@
     path: /etc/fstab
     line: 'tmpfs /tmp tmpfs defaults,noatime,nodev,nosuid,mode=1777 0 0'
 
+- name: Modify fstab - add tmp
+  lineinfile:
+    path: /etc/fstab
+    line: 'tmpfs /var/tmp tmpfs defaults,noatime,nodev,nosuid,mode=1777 0 0'
+
 - name: Delete securetty file
   file:
     path: /etc/securetty
