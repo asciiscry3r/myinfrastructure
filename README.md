@@ -30,7 +30,7 @@
 ========================
 
     * openwrt
-    * prometheus exporter
+    * prometheus exporter, snmp6
     * ETC
     * bash CM
 

@@ -215,7 +215,7 @@
   tags:
     - firewall
 
-- name: Allow and manage access on server
+- name: Allow and manage access on server | sudo ufw allow from 203.0.113.103 proto tcp to any port 22
   ufw:
     rule: '{{ item.action }}'
  #   interface: '{{ item.interface }}'

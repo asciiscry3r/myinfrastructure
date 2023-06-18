@@ -23,7 +23,7 @@
     - add_wireguard
 
 #
-#    ip address add dev wg0 192.168.3.1/24
+#    ip address add dev wg0 192.168.3.1/24 
 #    ip address add dev wg0 192.168.3.1 peer 192.168.3.2
 #
 
@@ -36,4 +36,4 @@
     wg genpsk > presharedkey
     wg set wg0 listen-port {{ wireguard_port }} private-key privatekey peer $(cat privatekey | wg pubkey) allowed-ips 0.0.0.0/0 endpoint {{ ansible_host }}:{{ wireguard_port }}
   tags:
-    - add_wireguardo
+    - add_wireguard

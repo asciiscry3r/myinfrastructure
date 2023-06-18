@@ -98,4 +98,4 @@ server_megumin_attack: false
 wireguard_network_cidr: "192.168.3.1/24"
 wireguard_network_main: "192.168.3.1"
 wireguard_network_peer: "192.168.3.2"
-wireguard_port: 7453
+wireguard_port: 443

@@ -16,4 +16,3 @@ sleep 30
   sleep 1
   sudo killall hping3
 done
-

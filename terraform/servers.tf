@@ -1,7 +1,7 @@
 // Copyright (C) 2022 by Klimenko Maxim Sergeevich
 
 locals {
-  aws_arch_ami = "ami-0185d998a628da704"
+  aws_arch_ami = "ami-00ac48b566b3a70d1"
   // ami-0f670c4daa876739f
 }
 
