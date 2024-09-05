@@ -37,10 +37,10 @@
     state: latest
   with_items:
     - prometheus-node-exporter
-    - prometheus-process-exporter-bin
+#    - prometheus-process-exporter-bin
     - prometheus-systemd-exporter
     - prometheus-wireguard-exporter
-    - prometheus-nginxlog-exporter-bin
+#    - prometheus-nginxlog-exporter-bin
     - nginx-prometheus-exporter
   tags:
     - prometheus

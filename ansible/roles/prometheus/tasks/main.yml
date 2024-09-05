@@ -8,9 +8,9 @@
     var: ansible_facts
 
 - name: Install Ubuntu/Debian packages and configure OS specific settings
-  include: debbased.yml
+  include_tasks: debbased.yml
   when: ansible_distribution == 'Ubuntu'
 
 - name: Install Arch packages and configure OS specific settings
-  include: archlinux.yml
+  include_tasks: archlinux.yml
   when: ansible_distribution == 'Archlinux'

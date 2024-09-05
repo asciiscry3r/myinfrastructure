@@ -1,3 +1,4 @@
+
 ---
 # tasks file for roles/server_config
 - debug:
@@ -18,11 +19,11 @@
     line: 'nameserver 1.1.1.1'
 
 - name: Install Ubuntu/Debian packages and configure OS specific settings
-  include: debbased.yml
+  import_tasks: debbased.yml
   when: ansible_distribution == 'Ubuntu'
 
 - name: Install Arch packages and configure OS specific settings
-  include: archlinux.yml
+  import_tasks: archlinux.yml
   when: ansible_distribution == 'Archlinux'
 
 - name: Swap creating

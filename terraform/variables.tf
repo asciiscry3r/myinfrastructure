@@ -1,7 +1,8 @@
+
 // Copyright (C) 2021 by Klimenko Maxim Sergievich
 
 variable "aws_region" {
-  default = "eu-central-1"
+  default = "us-east-1"
 }
 
 variable "aws_zone_id" {
@@ -9,7 +10,7 @@ variable "aws_zone_id" {
 }
 
 variable "vpc_id_main" {
-  default = "vpc-096e5bbc5fbfa0ebc"
+  default = "vpc-0b44d1c654ca78eb8"
 }
 
 variable "encryption_state" {
