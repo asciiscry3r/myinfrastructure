@@ -127,6 +127,18 @@
     path: /etc/securetty
     block: "{{ server_securetty_content }}"
 
+- name: Added umask to bash
+  lineinfile:
+    path: .bashrc
+    state: present
+    line: 'umask 027'
+
+- name: Added candys to bash
+  lineinfile:
+    path: .bashrc
+    state: present
+    line: 'fortune | cowsay -f tux | lolcat'
+
 - name: Create logrotate configs from template
   template:
     src: sysctl.conf.j2

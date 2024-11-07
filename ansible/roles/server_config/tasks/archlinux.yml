@@ -33,7 +33,7 @@
   register: server_system_upgrades
   tags:
     - update_arch_server
-
+\
 - name: Install apparmor profiles and system utils | Arch
   pacman:
     pkg: '{{ item }}'
@@ -54,22 +54,6 @@
     - "{{ server_apps }}"
   tags:
     - manage_arch_packages
-
-- name: Added umask to bash | Arch
-  lineinfile:
-    path: .bashrc
-    state: present
-    line: 'umask 027'
-  tags:
-    - update_arch_server
- 
-- name: Added candys to bash | Arch
-  lineinfile:
-    path: .bashrc
-    state: present
-    line: 'fortune | cowsay -f tux | lolcat'
-  tags:
-    - update_arch_server
 
 - name: Check if machine required reboot | Arch
   stat:
