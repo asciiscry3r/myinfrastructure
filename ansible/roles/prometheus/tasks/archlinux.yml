@@ -27,9 +27,6 @@
   tags:
     - prometheus
 
-#
-# wireguard_exporter ALL=(root) NOPASSWD: /usr/bin/wg
-#
 - name: Install prometheus exporters | Arch
   pacman:
     pkg: '{{ item }}'

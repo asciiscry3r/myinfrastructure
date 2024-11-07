@@ -11,6 +11,7 @@
     - instal_nginx
 
 - name: Create SSL/TLS sertifiate for Nginx by using LetsEncrypt | Arch
-  shell: sudo certbot certonly --standalone -d '{{ server_name }}' --agree-tos -m '{{ server_admin_email }}' -n
+  shell: sudo systemctl stop nginx && sudo killall nginx
+  ignore_errors: true
   tags:
     - instal_nginx

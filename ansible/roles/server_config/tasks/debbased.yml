@@ -7,8 +7,7 @@
     cache_valid_time: 3600
   register: server_system_upgrades
   tags:
-    - update_server
-    - reboot_machine
+    - update_deb_server
 
 - name: Install user defined packages | Ubuntu
   apt:
@@ -19,7 +18,7 @@
   with_items:
     - "{{ server_apps }}"
   tags:
-    - manage_packages
+    - update_deb_server
 
 - name: Added umask to bash | Ubuntu
   lineinfile:
@@ -28,6 +27,7 @@
     line: 'umask 027'
   tags:
     - google-authenticator
+    - update_deb_server
 
 - name: Added candys to bash | Ubuntu
   lineinfile:
@@ -36,6 +36,7 @@
     line: 'fortune | cowsay -f tux | lolcat'
   tags:
     - google-authenticator
+    - update_deb_server
 
 - name: Install apparmor profiles and system utils | Ubuntu
   apt:
@@ -46,6 +47,8 @@
     - apparmor-profiles
     - apparmor-profiles-extra
     - apparmor-utils
+  tags:
+    - update_deb_server
 
 - name: Check if machine required reboot | Ubuntu
   stat:

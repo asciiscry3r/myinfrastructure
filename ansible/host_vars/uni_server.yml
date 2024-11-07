@@ -87,7 +87,7 @@ server_logrotate_conf:
       - "rotate 14"
       - "compress"
       - "notifempty"
-      - "create 0640 nginx adm"
+      - "create 0640 www-data adm"
       - "sharedscripts"
       - "postrotate"
       - "systemctl reload test-app"

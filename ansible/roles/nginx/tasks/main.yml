@@ -29,7 +29,7 @@
     dest: /etc/nginx/sites-enabled
     state: directory
   tags:
-    - add_nginx
+    - install_nginx
 
 - name: Create directory for site data
   file:
@@ -37,7 +37,7 @@
     state: directory
     owner: www-data
   tags:
-    - add_nginx
+    - install_nginx
 
 - name: Create main config
   template:
@@ -45,23 +45,16 @@
     dest: /etc/nginx/nginx.conf
     force: yes
   tags:
-    - add_nginx
+    - install_nginx
 
 - name: Create Letsencrypt dir
   file:
     dest: /etc/letsencrypt/live/
     state: directory
   tags:
-    - add_nginx
-    - configure
+    - configure_nginx
 
-#- name: Create ssl certificate
-#  shell: sudo certbot certonly --nginx -n -m {{ server_admin_email }} --agree-tos -d {{ server_name }}
-#  tags:
-#    - add_nginx
-#    - configure
-
-- name: Install Nginx default site
+- name: Install default sites
   template:
     src: "{{ item }}"
     dest: /etc/nginx/sites-enabled/{{ item | basename | regex_replace('\.j2$', '') }}
@@ -69,8 +62,41 @@
   with_items:
     - "{{ lookup('fileglob', '{{role_path}}/templates/*.site.conf.j2', wantlist=True) }}"
   tags:
-    - add_nginx
-    - configure
+    - configure_nginx
+
+- name: Install default sites
+  template:
+    src: jenkins.conf.j2
+    dest: /etc/nginx/sites-enabled/jenkins.conf.j2
+    force: yes
+    when: install_jenkins
+  tags:
+    - install_jenkins
+    - configure_nginx
+
+- name: Check if main certificate already exist
+  stat:
+    path: /etc/letsencrypt/live/{{ server_name }}/fullchain.pem
+  register: main_cert
+
+- name: Check if repo certificate already exist
+  stat:
+    path: /etc/letsencrypt/live/repo.{{ server_name }}/fullchain.pem
+  register: repo_cert
+
+- name: Create ssl certificate for main
+  shell: sudo certbot certonly --nginx -n -m {{ server_admin_email }} --agree-tos -d {{ server_name }}
+  when: main_cert.stat.exists
+  tags:
+    - add_certs
+    - configure_nginx
+
+- name: Create ssl certificate for repo
+  shell: sudo certbot certonly --nginx -n -m {{ server_admin_email }} --agree-tos -d repo.{{ server_name }}
+  when: repo_cert.stat.exists
+  tags:
+    - add_certs
+    - configure_nginx
 
 - name: Create test site dir
   file:
@@ -81,8 +107,7 @@
     group: www-data
     mode: 0755
   tags:
-    - add_nginx
-    - configure
+    - configure_nginx
 
 - name: Added test site code
   copy:
@@ -92,12 +117,11 @@
     group: www-data
     mode: 0644
   tags:
-    - add_nginx
-    - configure
+    - configure_nginx
 
-#- name: Validate config
-#  shell: sudo killall nginx && sudo nginx -t
-#  notify: "restart nginx service"
-#  tags:
-#    - add_nginx
-#    - configure
+- name: Validate config
+  shell: sudo killall nginx && sudo nginx -t
+  notify: "restart nginx service"
+  tags:
+    - configure_nginx
+

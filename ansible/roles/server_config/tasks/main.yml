@@ -32,9 +32,19 @@
     sudo chmod 600 /swapfile
     sudo mkswap /swapfile
     sudo swapon /swapfile
-    echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
   tags:
     - createswap
+
+- name: Delete existing entries in fstab | Swap
+  lineinfile:
+    path: /etc/fstab
+    state: absent
+    regexp: '\/swapfile'
+
+- name: Modify fstab - add Swap
+  lineinfile:
+    path: /etc/fstab
+    line: '/swapfile none swap sw 0 0'
 
 - name: Set server hostname
   hostname:
