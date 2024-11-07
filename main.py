@@ -3,11 +3,12 @@ import telegram
 import pacman, json
 import socket
 import asyncio
+from datetime import datetime
 from pyboinc import init_rpc_client
 
 
 IP_BOINC = "127.0.0.1"
-PASSWORD_BOINC = "cc304e522c2b6ebc206a17fd6150f1ac"
+PASSWORD_BOINC = ""
 
 
 # {'id': 'acl', 'version': '2.3.1-3', 'upgradable': False, 'installed': True}
@@ -46,7 +47,7 @@ def get_boinc_status(results):
 
 
 async def main():
-    bot = telegram.Bot("5986905443:AAGd0p5vUoA0a40D3_mOp3HuHX8t1DLCYG0")
+    bot = telegram.Bot("")
     # pacman.refresh() from root
     list = json.loads(json.JSONEncoder().encode(pacman.get_installed()))
     dict = json.dumps(pacman.get_installed())
@@ -54,7 +55,9 @@ async def main():
     rpc_client = await init_rpc_client(IP_BOINC, PASSWORD_BOINC)
     results = await rpc_client.get_results()
     hostname =  socket.gethostname()
-    telegram_message = f"{hostname} is upgradable: {get_values(dict)}".translate({ord(i): None for i in "'[]"})
+    today_date_time = datetime.now()
+    today_date_time = today_date_time.strftime("%d/%m/%Y %H:%M")
+    telegram_message = f"Hi, {today_date_time}, this host - {hostname} have this upgrades: {get_values(dict)}".translate({ord(i): None for i in "'[]"})
     async with bot:
         await bot.send_message(text=telegram_message, chat_id='-991702195')
 
@@ -68,9 +71,3 @@ async def main():
 if __name__ == '__main__':
     asyncio.run(main())
 
-
-# Router Internet Ethernet II, Src: EdimaxTe_22:9f:b4 (08:be:ac:22:9f:b4), Dst: Solarfla_08:d7:0c (00:0f:53:08:d7:0c) 0x00008864
-# Hack...Piracy Ethernet II, Src: HpnSuppl_e9:39:b1 (00:1d:b3:e9:39:b1), Dst: HewlettP_09:13:a6 (09:00:09:09:13:a6)
-# Hack...Piracy Ethernet II, Src: Tp-LinkT_c5:cd:bf (ec:08:6b:c5:cd:bf), Dst: IPv6mcast_01:00:02 (33:33:00:01:00:02)
-# Hack...Piracy Ethernet II, Src: HpnSuppl_e9:39:b1 (00:1d:b3:e9:39:b1), Dst: LLDP_Multicast (01:80:c2:00:00:0e) 0x000088b7
-# 20 8-22 * * * /usr/bin/pacman -Syy
