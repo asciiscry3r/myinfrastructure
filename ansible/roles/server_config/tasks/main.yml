@@ -39,7 +39,7 @@
     sudo chmod 600 /swapfile
     sudo mkswap /swapfile
     sudo swapon /swapfile
-  when: swapfile.stat.exist == false
+  when: swapfile.stat.exists == false
   tags:
     - createswap
 
