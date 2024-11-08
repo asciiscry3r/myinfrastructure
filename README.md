@@ -1,62 +1,35 @@
 ## Cloud and local components for work/lab/etc
-====================
+_________________________________
 
-    * backups
-    * rpi server
-    * networmonitoring - grafana - EC2, prometheus - EC2
-    * github and blog
-    * photo sharing
-    * IasC, SEC?, CM, OPS
-
-### Backups
-=====================
-
-    * encrypted
+    * Grafana - EC2
+    * Prometheus - EC2
+    * Jenkins - EC2
+    * Docker - EC2
     * ansible CM
-    * local and remote?
-    * nanopi + HHD
-    * S3 + Glacier
-    * prometheus exporter
-
-### Rpi 3 b+
-=====================
-
-    * nixos or arch
+    * nixos or arch or ubuntu
     * encrypted
-    * ansible CM
-    * prometheus exporter
 
 ### TP Link Archer C7
-========================
+_________________________________
 
-    * openwrt
-    * prometheus exporter, snmp6
-    * ETC
+    * openwrt firmware
+    * prometheus exporter
     * bash CM
 
 ### AWS
-=========================
+_________________________________
 
     * terraform
-    * packer
-    * encrypted
     * ansible
-    * blog
-    * service vpn fot monitoring
-    * grafana
-    * prometheus exporter
+    * site/blog/cv
+    * test/demo environment
 
-___________
+__________________________________
 
-All drives must be encrypted as possible.
-Prometheus server must be placed on Raspberry PI.
-Site: https://themes.getnikola.com/v8/hack/demo/pages/handbook/#all-you-need-to-know
 
-_____________
-[He is LIVE!!!!](https://photos.app.goo.gl/L8TDwDuh3dGLK6V56)
-
-dd from device for diff with original firmware
-``
+#### List of Prom exporters
+__________________________________
+```
 prometheus                                prometheus-json-exporter-bin              prometheus-redis-exporter
 prometheus-adguard-exporter               prometheus-junos-exporter                 prometheus-redis-exporter-bin
 prometheus-apcupsd-exporter               prometheus-libvirt-exporter               prometheus-remo-e-exporter
@@ -80,3 +53,7 @@ prometheus-git                            prometheus-process-exporter           
 prometheus-haproxy-exporter-bin           prometheus-process-exporter-bin           prometheus-zfs-exporter
 prometheus-ipmi-exporter                  prometheus-push-gateway-bin               prometheus-zfsprom-exporter
 prometheus-json-exporter                  prometheus-pve-exporter                   
+
+```
+
+![Running ansible playbook](https://photos.app.goo.gl/qCQG1y4PTxvo9da4A "cow")

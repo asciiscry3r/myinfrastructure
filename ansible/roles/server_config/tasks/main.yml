@@ -26,12 +26,20 @@
   import_tasks: archlinux.yml
   when: ansible_distribution == 'Archlinux'
 
+  - name: Check if swapfile exist
+  stat:
+    path: /swapfile
+  register: swapfile
+  tags:
+    - createswap
+  
 - name: Swap creating
   shell: |
-    sudo fallocate -l 4G /swapfile
+    sudo fallocate -l 1G /swapfile
     sudo chmod 600 /swapfile
     sudo mkswap /swapfile
     sudo swapon /swapfile
+  when: swapfile.stat.exist == false
   tags:
     - createswap
 
