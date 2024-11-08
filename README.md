@@ -56,4 +56,4 @@ prometheus-json-exporter                  prometheus-pve-exporter
 
 ```
 
-![Running ansible playbook](https://imgur.com/a/KS8lHpf)
+![Running ansible playbook](https://i.imgur.com/I2zY3hG.png)
